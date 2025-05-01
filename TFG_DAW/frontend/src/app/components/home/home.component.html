@@ -1,0 +1,245 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid navbar-container">
+    <!-- Botón hamburguesa -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú colapsable -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <!-- Home icon -->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/home']">
+            <svg
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M38.5 18.375C38.5 16.2575 37.0825 13.545 35.35 12.3375L24.535 4.76004C22.085 3.04504 18.1475 3.13254 15.785 4.97004L6.3525 12.32C4.7775 13.545 3.5 16.1525 3.5 18.13V31.0975C3.5 35.1575 6.8075 38.4825 10.8675 38.4825H31.1325C35.1925 38.4825 38.5 35.1575 38.5 31.115V25.69"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M21 31.4825V26.2325"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </li>
+        <!-- Añadir icon -->
+        <li class="nav-item">
+          <a class="nav-link" href="#"
+            ><svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24 16V32M16 24H32M44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24C4 12.9543 12.9543 4 24 4C35.0457 4 44 12.9543 44 24Z"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </li>
+        <!-- Calendar icon -->
+        <li class="nav-item">
+          <a class="nav-link" href="#"
+            ><svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M33.5 7.12V4C33.5 3.18 32.82 2.5 32 2.5C31.18 2.5 30.5 3.18 30.5 4V7H17.5V4C17.5 3.18 16.82 2.5 16 2.5C15.18 2.5 14.5 3.18 14.5 4V7.12C9.09997 7.62 6.47997 10.84 6.07997 15.62C6.03997 16.2 6.51997 16.68 7.07997 16.68H40.92C41.5 16.68 41.98 16.18 41.92 15.62C41.52 10.84 38.9 7.62 33.5 7.12Z"
+                fill="white"
+              />
+              <path
+                opacity="0.4"
+                d="M42 21.6799V25.1599C42 26.3799 40.92 27.3199 39.72 27.1199C39.16 27.0399 38.58 26.9799 38 26.9799C31.94 26.9799 27 31.9199 27 37.9799C27 38.8999 27.36 40.18 27.74 41.34C28.18 42.64 27.22 43.9799 25.84 43.9799H16C9 43.9799 6 39.9799 6 33.9799V21.6599C6 20.5599 6.9 19.6599 8 19.6599H40C41.1 19.6799 42 20.5799 42 21.6799Z"
+                fill="white"
+              />
+              <path
+                d="M38 30C33.58 30 30 33.58 30 38C30 39.5 30.42 40.92 31.16 42.12C32.54 44.44 35.08 46 38 46C40.92 46 43.46 44.44 44.84 42.12C45.58 40.92 46 39.5 46 38C46 33.58 42.42 30 38 30ZM42.14 37.14L37.88 41.08C37.6 41.34 37.22 41.48 36.86 41.48C36.48 41.48 36.1 41.34 35.8 41.04L33.82 39.06C33.24 38.48 33.24 37.52 33.82 36.94C34.4 36.36 35.36 36.36 35.94 36.94L36.9 37.9L40.1 34.94C40.7 34.38 41.66 34.42 42.22 35.02C42.78 35.62 42.74 36.56 42.14 37.14Z"
+                fill="white"
+              />
+              <path
+                d="M17 30.0001C16.48 30.0001 15.96 29.7801 15.58 29.4201C15.22 29.0401 15 28.5201 15 28.0001C15 27.4801 15.22 26.9601 15.58 26.5801C16.04 26.1201 16.74 25.9 17.4 26.04C17.52 26.06 17.64 26.1 17.76 26.16C17.88 26.2 18 26.2601 18.12 26.3401C18.22 26.4201 18.32 26.5001 18.42 26.5801C18.78 26.9601 19 27.4801 19 28.0001C19 28.5201 18.78 29.0401 18.42 29.4201C18.32 29.5001 18.22 29.58 18.12 29.66C18 29.74 17.88 29.8001 17.76 29.8401C17.64 29.9001 17.52 29.9401 17.4 29.9601C17.26 29.9801 17.12 30.0001 17 30.0001Z"
+                fill="white"
+              />
+              <path
+                d="M24 30C23.48 30 22.96 29.78 22.58 29.42C22.22 29.04 22 28.52 22 28C22 27.48 22.22 26.96 22.58 26.58C23.34 25.84 24.68 25.84 25.42 26.58C25.78 26.96 26 27.48 26 28C26 28.52 25.78 29.04 25.42 29.42C25.04 29.78 24.52 30 24 30Z"
+                fill="white"
+              />
+              <path
+                d="M17 37C16.48 37 15.96 36.78 15.58 36.42C15.22 36.04 15 35.52 15 35C15 34.48 15.22 33.96 15.58 33.58C15.78 33.4 15.98 33.26 16.24 33.16C16.98 32.84 17.86 33.02 18.42 33.58C18.78 33.96 19 34.48 19 35C19 35.52 18.78 36.04 18.42 36.42C18.04 36.78 17.52 37 17 37Z"
+                fill="white"
+              />
+            </svg>
+          </a>
+        </li>
+        <!-- Perfil icon -->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']">
+            <svg
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M18 36C8.05887 36 0 27.9411 0 18C0 8.05887 8.05887 0 18 0C27.9411 0 36 8.05887 36 18C36 27.9411 27.9411 36 18 36ZM30.1082 26.3859C31.7595 24.006 32.7273 21.116 32.7273 18C32.7273 9.86635 26.1336 3.27273 18 3.27273C9.86635 3.27273 3.27273 9.86635 3.27273 18C3.27273 21.116 4.24042 24.0059 5.89167 26.3857C7.73335 23.9532 12.0609 22.9091 17.9999 22.9091C23.939 22.9091 28.2666 23.9532 30.1082 26.3859ZM27.7603 29.0288C27.2814 27.3066 23.8408 26.1818 17.9999 26.1818C12.1592 26.1818 8.71854 27.3065 8.23951 29.0286C10.838 31.3301 14.2559 32.7273 18 32.7273C21.7441 32.7273 25.1618 31.3301 27.7603 29.0288ZM18 8.18182C14.0385 8.18182 11.4545 11.0549 11.4545 14.7273C11.4545 20.3357 14.336 22.9091 18 22.9091C21.6296 22.9091 24.5455 20.4212 24.5455 15.0545C24.5455 11.3262 21.9505 8.18182 18 8.18182ZM14.7273 14.7273C14.7273 18.4406 16.0662 19.6364 18 19.6364C19.9272 19.6364 21.2727 18.4883 21.2727 15.0545C21.2727 13.0098 19.9893 11.4545 18 11.4545C15.9279 11.4545 14.7273 12.7895 14.7273 14.7273Z"
+                fill="#FFFFFF"
+              />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid images-container mt-2">
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <!-- Fomrulario superior -->
+      <form class="d-flex" role="search">
+        <div class="container my-4 icon-bar">
+          <div
+            class="d-flex align-items-center justify-content-between search-bar"
+          >
+            <!-- <input type="date" class="date-input me-3" /> -->
+            <span> <img src="" alt="" />LOGO</span>
+            <label>
+              <div class="radio-inputs">
+                <label>
+                  <input class="radio-input" type="radio" name="engine" />
+                  <span class="radio-tile">
+                    <span class="radio-label">0-10👤</span>
+                  </span>
+                </label>
+                <label>
+                  <input
+                    checked=""
+                    class="radio-input"
+                    type="radio"
+                    name="engine"
+                  />
+                  <span class="radio-tile">
+                    <span class="radio-label">10-50👤</span>
+                  </span>
+                </label>
+                <label>
+                  <input class="radio-input" type="radio" name="engine" />
+                  <span class="radio-tile">
+                    <span class="radio-label">+50👤</span>
+                  </span>
+                </label>
+              </div>
+            </label>
+            <!-- Search Bar -->
+            <div class="inputGroup mx-2">
+              <input type="text" required="" autocomplete="off" />
+              <label for="name">Buscar</label>
+            </div>
+            <button class="btn" type="submit">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="24 / basic / search">
+                  <path
+                    id="icon"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10C18 11.8487 17.3729 13.551 16.3199 14.9056L21.7071 20.2929L20.2929 21.7071L14.9056 16.3199C13.551 17.3729 11.8487 18 10 18ZM16 10C16 13.3137 13.3137 16 10 16C6.68629 16 4 13.3137 4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10Z"
+                    fill="black"
+                  />
+                </g>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Categories -->
+          <div class="d-flex overflow-auto mt-2">
+            <div class="category-item">
+              <div class="category-icon">⛳</div>
+              <small>Golf</small>
+            </div>
+            <div class="category-item">
+              <div class="category-icon">🛀</div>
+              <small>Spa's</small>
+            </div>
+            <div class="category-item">
+              <div class="category-icon">🏠</div>
+              <small>Exterior</small>
+            </div>
+            <div class="category-item">
+              <div class="category-icon">🕹️</div>
+              <small>Gamming</small>
+            </div>
+            <div class="category-item">
+              <div class="category-icon">🎤</div>
+              <small>Música</small>
+            </div>
+            <div class="category-item">
+              <div class="category-icon">🎳</div>
+              <small>Bowling</small>
+            </div>
+            <!-- Agrega más categorías según necesites -->
+            <div class="category-item">
+              <div class="category-icon">💼</div>
+              <small>Bussiness</small>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-start">
+    <!-- *ngFor="let item of listaNombres" -->
+    <div
+      class="col-sm-8 col-md-6 col-lg-3 mb-4"
+      *ngFor="let item of listaEspacios"
+    >
+      <div class="card" name="card">
+        <img src="{{ item.imagen }}" alt="Photo" class="card-img" />
+        <div class="card-img-overlay d-flex p-3">
+          <h5 class="card-title">{{ item.nombre }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

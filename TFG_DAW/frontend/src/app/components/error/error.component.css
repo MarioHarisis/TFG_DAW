@@ -1,0 +1,42 @@
+/* 404-error.component.css */
+.error-container {
+    background-color: #240046;
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .error-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .error-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #240046;
+  }
+  
+  .error-message {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #240046;
+  }
+  .error-icon {
+    font-size: 80px;
+  }
+
+  .btn{
+    background-color: #240046;
+    color: white;
+  }
+
+  .btn:hover {
+    background-color: #5A189A;
+  }
