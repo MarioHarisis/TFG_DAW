@@ -1,0 +1,116 @@
+<app-navbar></app-navbar>
+<hr class="custom-divider" />
+<!-- Divider -->
+
+<!-- Perfil -->
+<!-- Perfil y tarjeta lateral -->
+<div class="container my-3 d-flex justify-content-center align-items-start">
+  <div class="row w-100" style="max-width: 1200px">
+    <!-- Tarjeta de perfil (izquierda) -->
+    <div class="col-md-8 mb-3">
+      <div class="card p-4 rounded-4 shadow-lg h-100">
+        <h4 class="fw-bold text-dark mb-3">Perfil</h4>
+        <div class="text-center">
+          <img
+            src="https://i.pravatar.cc/100"
+            class="rounded-circle mb-3 shadow"
+            width="100"
+            height="100"
+            alt="Foto de perfil"
+          />
+          <h4 class="fw-bold text-dark">Juan Pérez</h4>
+          <p class="text-muted mb-4">email.correo.com</p>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-6">
+            <div class="bg-light rounded-4 p-3 border">
+              <h6 class="text-muted mb-1">Ubicación</h6>
+              <p class="mb-0 text-dark">Barcelona, España</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="bg-light rounded-4 p-3 border">
+              <h6 class="text-muted mb-1">Teléfono</h6>
+              <p class="mb-0 text-dark">+34 600 123 456</p>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="bg-light rounded-4 p-3 border">
+              <h6 class="text-muted mb-1">Sobre mí</h6>
+              <p class="mb-0 text-dark">
+                Desarrollador frontend con pasión por la tecnología y el diseño
+                moderno.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-outline-secondary rounded-pill px-4">
+            Editar perfil
+          </button>
+          <button class="btn btn-dark rounded-pill px-4">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segunda tarjeta (derecha) -->
+    <div class="col-md-4 mb-3">
+      <div class="card p-4 rounded-4 shadow-lg h-100">
+        <h4 class="fw-bold text-dark mb-3">Actividad reciente</h4>
+        <ul class="list-group">
+          <li class="list-group-item d-flex">
+            Subida de archivo
+            <i class="bi bi-chevron-right ms-auto"></i>
+          </li>
+          <li class="list-group-item d-flex">
+            Me gusta recientes
+            <i class="bi bi-chevron-right ms-auto"></i>
+          </li>
+          <li class="list-group-item d-flex">
+            Ajustes de la cuenta
+            <i class="bi bi-chevron-right ms-auto"></i>
+          </li>
+          <li class="list-group-item d-flex">
+            Seguimiento de usuario
+            <i class="bi bi-chevron-right ms-auto"></i>
+          </li>
+          <li class="list-group-item d-flex">
+            Actualización de perfil
+            <i class="bi bi-chevron-right ms-auto"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- contenido perfil inferior -->
+<div class="container d-flex justify-content-center align-items-start">
+  <div class="row w-100" style="max-width: 1200px">
+    <div class="col-12">
+      <div
+        class="card p-4 rounded-4 shadow-lg"
+        style="width: 100%; font-family: 'Poppins', sans-serif"
+      >
+        <h3 class="fw-bold text-dark mb-3">Historial de reservas</h3>
+        <div class="list-group">
+          <a class="list-group-item list-group-item-action">A link item</a>
+          <a class="list-group-item list-group-item-action">A link item</a>
+          <a class="list-group-item list-group-item-action">A link item</a>
+          <a class="list-group-item list-group-item-action">A link item</a>
+          <a class="list-group-item list-group-item-action">A link item</a>
+          <a class="list-group-item list-group-item-action">A link item</a>
+          <a class="list-group-item list-group-item-action">A link item</a>
+          <a class="list-group-item list-group-item-action">A link item</a>
+          <a class="list-group-item list-group-item-action">A link item</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5">
+  <app-footer></app-footer>
+</div>

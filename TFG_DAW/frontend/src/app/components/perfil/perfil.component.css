@@ -1,0 +1,93 @@
+/* Fuentes limpias y modernas */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e8e8e8;
+  }
+    /* Divider */
+    .custom-divider {
+      background-color: #240046;
+    }
+  
+  /* Tarjeta principal */
+  .card {
+    border: 1px solid white;
+    border-radius: 17px;
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    transition: all 0.5s;
+  }
+  .card:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+  }
+  .card:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+  }
+
+  /* Imagen de perfil */
+  img.rounded-circle {
+    border: 4px solid #5A189A;
+  }
+  
+  /* Títulos */
+  h4 {
+    color: #3a3a3c;
+  }
+  
+  h6 {
+    font-weight: 600;
+  }
+  i:hover{
+    cursor: pointer;
+  }
+  
+  /* Texto general */
+  .text-muted {
+    color: #888 !important;
+  }
+  
+  .text-dark {
+    color: #333 !important;
+  }
+  
+  /* Botones */
+  .btn-outline-secondary {
+    border-radius: 999px;
+    border: 2px solid #ccc;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #eee;
+    border-color: #C77DFF;
+  }
+  
+  .btn-dark {
+    background-color: #5A189A;
+    border: none;
+    color: white;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-dark:hover {
+    background-color: #C77DFF;
+  }
+  
+  /* Información de usuario */
+  .bg-light {
+    background-color: #f9f9fc !important;
+    border-radius: 1rem;
+    border: 1px solid #e0e0e0 !important;
+  }
+  
+  .border {
+    border-color: #C77DFF !important;
+  }
+
+  .list-group-item:hover {
+    background-color: #e8e8e8;
+  }
+  .list-group-item {
+    border-color: #C77DFF;
+  }

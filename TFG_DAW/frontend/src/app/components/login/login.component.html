@@ -1,4 +1,17 @@
 <div class="background-image">
+  <!-- Loader ahora está fuera del container, directamente como hijo de background-image -->
+  <div class="loader">
+    <div class="words">
+      <span class="word"></span>
+      <span class="word">Quien</span>
+      <span class="word">Donde</span>
+      <span class="word">Como</span>
+      <span class="word">Cuando</span>
+    </div>
+    <p>quieras</p>
+  </div>
+
+  <!-- Container ahora solo contiene el formulario -->
   <div class="container">
     <form class="form">
       <div class="flex-column">
@@ -17,7 +30,7 @@
             ></path>
           </g>
         </svg>
-        <input placeholder="ejemplo@correo.com" class="input" type="text" />
+        <input placeholder="ejemplo@correo.com" class="input" type="email" />
       </div>
 
       <div class="flex-column">

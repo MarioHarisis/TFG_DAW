@@ -1,31 +1,4 @@
 body {
   background-color: #e8e8e8;
-  /* background-color: #f0eadc; */
+  /* PRINCIPAL PURPLE 240046*/
 }
-
-/* Navbar */
-.navbar {
-    background-color: #240046;
-}
-
-.navbar a {
-    color: white;
-}
-
-.navbar-brand {
-    color: white;
-}
-
-.navbar-nav .nav-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-  }
-  
-  .navbar-nav .nav-link svg {
-    display: block;
-    height: 35px; /* Tamaño iconos navbar */
-    width: auto;
-  }
-  
