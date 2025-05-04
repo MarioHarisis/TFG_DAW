@@ -11,6 +11,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { AgregarComponent } from './components/agregar/agregar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DetailComponent } from './components/detail/detail.component';
     PerfilComponent,
     FooterComponent,
     NavbarComponent,
-    DetailComponent
+    DetailComponent,
+    AgregarComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { AgregarComponent } from './components/agregar/agregar.component';
 
 const routes: Routes = [
 {
@@ -27,6 +28,10 @@ const routes: Routes = [
 {
   path:'perfil',
   component:PerfilComponent
+},
+{
+  path:'agregar',
+  component: AgregarComponent
 },
 {
   path:'error',

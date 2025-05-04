@@ -2,3 +2,40 @@ body {
   background-color: #e8e8e8;
   /* PRINCIPAL PURPLE 240046*/
 }
+
+/* Cards */
+.card {
+  border: 2px solid white;
+  border-radius: 17px;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  transition: all 0.5s;
+}
+.card:hover {
+  border: 2px solid #240046;
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+/* Listas */
+.list-group-item:hover {
+  background-color: #e8e8e8;
+}
+.list-group-item {
+  border-color: #5A189A;
+}
+
+  /* Botones */
+  .btn-outline-secondary {
+    border-radius: 999px;
+    border: 2px solid #ccc;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #eee;
+    border-color: #5A189A;
+  }

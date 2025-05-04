@@ -190,21 +190,12 @@ h3 {
     width: 1px;
   }
 
-  /* Divider */
-  .custom-divider {
-    background-color: #240046;
-    width: 100%;
-  }
-
   /* Imagenes / card */
   .card {
     box-sizing: border-box;
     width: 300px;
     height: 500px;
     position: relative;
-    border: 1px solid white;
-    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
-    border-radius: 17px;
     overflow: hidden; /* para que la imagen no se salga del borde redondeado */
     cursor: pointer;
     transition: all 0.5s;
@@ -213,16 +204,6 @@ h3 {
     justify-content: center;
     user-select: none;
     font-weight: bolder;
-    color: black;
-  }
-  
-  .card:hover {
-    border: 1px solid black;
-    transform: scale(1.05);
-  }
-  
-  .card:active {
-    transform: scale(0.95) rotateZ(1.7deg);
   }
   
   .card-img {

@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+
+<div
+  class="my-5 d-flex justify-content-center align-items-center background-image"
+>
+  <div class="card p-5" style="width: 70%">
+    <h3 class="fw-bold mb-4 text-center">Agregar mi espacio</h3>
+    <form>
+      <!-- nombre -->
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          placeholder="El nombre de tu espacio a publicar"
+        />
+      </div>
+      <!-- descrripcion -->
+      <div class="mb-3">
+        <label for="mensaje" class="form-label">Descripción</label>
+        <textarea
+          class="form-control"
+          id="descripcion"
+          rows="2"
+          placeholder="Cuéntanos sobre tu espacio..."
+        ></textarea>
+      </div>
+      <!-- ubicacion -->
+      <div class="mb-3">
+        <label for="correo" class="form-label">Ubicación</label>
+        <input
+          type="text"
+          class="form-control"
+          id="ubicacion"
+          placeholder="¿Donde se encuentra?"
+        />
+      </div>
+      <!-- telefono -->
+      <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input
+          type="tel"
+          class="form-control"
+          id="telefono"
+          placeholder="+34 600 123 456"
+        />
+      </div>
+      <!-- Precio -->
+      <div class="mb-3">
+        <label for="correo" class="form-label">Precio</label>
+        <input
+          type="number"
+          class="form-control"
+          id="precio"
+          placeholder="€/1 hora"
+        />
+      </div>
+      <!-- personas -->
+      <div class="mb-3 text-center">
+        <label>
+          ¿Cuántas personas caben en tu espacio?
+          <div class="radio-inputs">
+            <label>
+              <input class="radio-input" type="radio" name="engine" />
+              <span class="radio-tile">
+                <span class="radio-label">0-10👤</span>
+              </span>
+            </label>
+            <label>
+              <input
+                checked=""
+                class="radio-input"
+                type="radio"
+                name="engine"
+              />
+              <span class="radio-tile">
+                <span class="radio-label">10-50👤</span>
+              </span>
+            </label>
+            <label>
+              <input class="radio-input" type="radio" name="engine" />
+              <span class="radio-tile">
+                <span class="radio-label">+50👤</span>
+              </span>
+            </label>
+          </div>
+        </label>
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn">Publicar espacio</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="mt-5">
+  <app-footer></app-footer>
+</div>

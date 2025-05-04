@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  isFlipped = false;
 
+  toggleFlip() {
+    this.isFlipped = !this.isFlipped;
+  }
 }
