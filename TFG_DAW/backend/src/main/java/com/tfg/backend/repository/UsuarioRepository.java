@@ -3,6 +3,7 @@ package com.tfg.backend.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.tfg.backend.model.Usuario;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import java.util.Optional;
 
 @RepositoryRestResource(path = "usuarios")
 /*
@@ -16,5 +17,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * DELETE /usuarios/{id}: Para eliminar un producto por su ID.
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
+    Optional<Usuario> findByEmail(String email);
 }

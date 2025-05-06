@@ -1,7 +1,9 @@
 package com.tfg.backend.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /*
  * ¿Qué es CORS?
@@ -53,12 +55,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(@NonNull CorsRegistry registry) {
         // Configura CORS para todos los endpoints
         registry.addMapping("/**") // Aplica a todos los endpoints
                 .allowedOrigins("http://localhost:4200") // Permite acceso desde Angular (localhost:4200)
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
                 .allowedHeaders("*") // Permite todos los encabezados
                 .allowCredentials(true); // Permitir credenciales si es necesario
+    }
+
+    @Override
+    public void addResourceHandlers(@NonNull ResourceHandlerRegistry registry) {
+        // Expone el directorio "images/" como ruta accesible públicamente
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:images/"); // O usa la ruta absoluta si está fuera del proyecto
     }
 }
