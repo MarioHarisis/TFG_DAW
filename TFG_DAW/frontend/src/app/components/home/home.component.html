@@ -103,9 +103,9 @@
 
 <div class="container-fluid px-4">
   <div class="d-flex flex-wrap justify-content-center gap-4">
-    <div *ngFor="let item of listaEspacios">
-      <div class="card">
-        <img src="{{ item.imagen }}" alt="Photo" class="card-img" />
+    <div *ngFor="let item of espacios">
+      <div class="card" [routerLink]="['/detail/' + item.id]">
+        <img [src]="item.imagen" alt="Espacio-img" class="card-img" />
         <div class="card-img-overlay d-flex p-3">
           <h5 class="card-title">{{ item.nombre }}</h5>
         </div>
@@ -113,5 +113,4 @@
     </div>
   </div>
 </div>
-
 <app-footer></app-footer>

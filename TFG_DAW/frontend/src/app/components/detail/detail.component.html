@@ -18,7 +18,7 @@
             <!-- Imagen de fondo -->
             <img
               class="card-img"
-              src="assets/jon-tyson-ak-PMKPQEAc-unsplash.jpg"
+              [src]="espacio.imagen"
               alt="Imagen de fondo"
               style="width: 100%; height: auto; border-radius: 4px"
             />
@@ -35,15 +35,11 @@
                 padding: 10px;
               "
             >
-              <h3 class="card-title text-center">PRIVATE STUDIO</h3>
+              <h3 class="card-title text-center">{{ espacio.nombre }}</h3>
               <div class="row">
                 <div class="container col-10 my-2">
                   <p class="card-text text-light my-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus vel convallis justo. Curabitur tempor pulvinar
-                    arcu sit amet vulputate. Fusce libero mauris, viverra at
-                    interdum vitae, scelerisque et tellus. Curabitur sed
-                    malesuada
+                    {{ espacio.descripcion }}
                   </p>
                 </div>
               </div>
@@ -51,7 +47,8 @@
                 <h4 class="col-4"></h4>
                 <button class="btn btn-light col-4">Reservar</button>
                 <h4 class="col-4 text-light">
-                  10-15<span
+                  {{ espacio.capacidad
+                  }}<span
                     ><svg
                       width="32"
                       height="32"

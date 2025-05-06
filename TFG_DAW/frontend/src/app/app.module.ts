@@ -12,6 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { AgregarComponent } from './components/agregar/agregar.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AgregarComponent } from './components/agregar/agregar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(withEventReplay())

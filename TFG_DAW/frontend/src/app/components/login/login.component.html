@@ -16,7 +16,7 @@
     <div class="flip-card-inner" [ngClass]="{ flipped: isFlipped }">
       <div class="flip-card-front">
         <div class="container">
-          <form class="form">
+          <form class="form" (ngSubmit)="onLogin()">
             <div class="flex-column">
               <label>Correo electrónico</label>
             </div>
@@ -36,7 +36,9 @@
               <input
                 placeholder="ejemplo@correo.com"
                 class="input"
+                name="email"
                 type="email"
+                [(ngModel)]="email"
               />
             </div>
 
@@ -60,7 +62,9 @@
               <input
                 placeholder="Introduce contraseña"
                 class="input"
+                name="password"
                 type="password"
+                [(ngModel)]="password"
               />
             </div>
 

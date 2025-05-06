@@ -15,10 +15,6 @@ body {
   transform: scale(1.05);
 }
 
-.card:active {
-  transform: scale(0.95) rotateZ(1.7deg);
-}
-
 /* Listas */
 .list-group-item:hover {
   background-color: #e8e8e8;

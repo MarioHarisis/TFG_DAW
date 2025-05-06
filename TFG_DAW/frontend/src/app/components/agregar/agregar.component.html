@@ -5,7 +5,7 @@
 >
   <div class="card p-5" style="width: 70%">
     <h3 class="fw-bold mb-4 text-center">Agregar mi espacio</h3>
-    <form>
+    <form (ngSubmit)="submit()">
       <!-- nombre -->
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
@@ -13,47 +13,48 @@
           type="text"
           class="form-control"
           id="nombre"
+          name="nombre"
           placeholder="El nombre de tu espacio a publicar"
+          [(ngModel)]="espacio.nombre"
+          required
         />
       </div>
       <!-- descrripcion -->
       <div class="mb-3">
-        <label for="mensaje" class="form-label">Descripción</label>
+        <label for="descripcion" class="form-label">Descripción</label>
         <textarea
           class="form-control"
           id="descripcion"
+          name="descripcion"
           rows="2"
+          maxlength="200"
           placeholder="Cuéntanos sobre tu espacio..."
+          [(ngModel)]="espacio.descripcion"
         ></textarea>
       </div>
       <!-- ubicacion -->
       <div class="mb-3">
-        <label for="correo" class="form-label">Ubicación</label>
+        <label for="ubicacion" class="form-label">Ubicación</label>
         <input
           type="text"
           class="form-control"
           id="ubicacion"
+          name="ubicacion"
           placeholder="¿Donde se encuentra?"
-        />
-      </div>
-      <!-- telefono -->
-      <div class="mb-3">
-        <label for="telefono" class="form-label">Teléfono</label>
-        <input
-          type="tel"
-          class="form-control"
-          id="telefono"
-          placeholder="+34 600 123 456"
+          [(ngModel)]="espacio.ubicacion"
         />
       </div>
       <!-- Precio -->
       <div class="mb-3">
-        <label for="correo" class="form-label">Precio</label>
+        <label for="precio" class="form-label">Precio</label>
         <input
           type="number"
           class="form-control"
           id="precio"
-          placeholder="€/1 hora"
+          name="precio"
+          placeholder="€/hora"
+          [(ngModel)]="espacio.precio"
+          min="1"
         />
       </div>
       <!-- personas -->
@@ -62,24 +63,37 @@
           ¿Cuántas personas caben en tu espacio?
           <div class="radio-inputs">
             <label>
-              <input class="radio-input" type="radio" name="engine" />
+              <input
+                class="radio-input"
+                type="radio"
+                name="capacidad"
+                value="10"
+                [(ngModel)]="espacio.capacidad"
+              />
               <span class="radio-tile">
                 <span class="radio-label">0-10👤</span>
               </span>
             </label>
             <label>
               <input
-                checked=""
                 class="radio-input"
                 type="radio"
-                name="engine"
+                name="capacidad"
+                value="50"
+                [(ngModel)]="espacio.capacidad"
               />
               <span class="radio-tile">
                 <span class="radio-label">10-50👤</span>
               </span>
             </label>
             <label>
-              <input class="radio-input" type="radio" name="engine" />
+              <input
+                class="radio-input"
+                type="radio"
+                name="capacidad"
+                value="51"
+                [(ngModel)]="espacio.capacidad"
+              />
               <span class="radio-tile">
                 <span class="radio-label">+50👤</span>
               </span>
@@ -87,8 +101,26 @@
           </div>
         </label>
       </div>
+
+      <!-- Cargar imagen -->
+      <div class="mb-3">
+        <label for="imagen" class="form-label">Sube una imagen</label>
+        <input
+          type="file"
+          class="form-control"
+          id="imagen"
+          (change)="onFileChange($event)"
+          name="imagen"
+          accept="image/*"
+          #fileInput
+        />
+        <!-- #fileInput para enlazar con la lógica -->
+      </div>
       <div class="d-grid">
-        <button type="submit" class="btn">Publicar espacio</button>
+        <!-- deshabilitar botón mientras se envía el nuevo espacio -->
+        <button type="submit" class="btn" [disabled]="enviando">
+          Publicar espacio
+        </button>
       </div>
     </form>
   </div>
