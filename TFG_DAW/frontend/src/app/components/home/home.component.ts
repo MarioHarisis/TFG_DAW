@@ -11,19 +11,37 @@ import { EspacioService } from '../../services/espacio.service';
 export class HomeComponent {
 
   espacios : Espacio[] =[];
+  existeSesion: boolean = false;
 
   constructor(private espacioService : EspacioService){}
 
   ngOnInit(): void {
     this.getAllEspacios();
+    /*if (typeof window !== 'undefined') se utiliza para verificar si el objeto window 
+     * está disponible en el entorno de ejecución. Esto es útil en aplicaciones Angular 
+     * para asegurarse de que el código se está ejecutando en el navegador y no en 
+     * el servidor (como durante el server-side rendering o en pruebas automáticas). 
+     * 
+     * typeof window devuelve 'object' si estás en un navegador (donde window existe).
+     * Si estás en un entorno donde window no existe 
+     * (por ejemplo, en Node.js durante la renderización en servidor), devuelve 'undefined'.
+     * */
+    if (typeof window !== 'undefined') {
+      // si existe un usuario guardado en la sesión
+      if (sessionStorage.getItem('usuario')) {
+        this.existeSesion = true;
+        console.log("HOME: Existe sesion");
+      }
+    }else {
+      console.log("HOME: Sin sesión iniciada");
+    }
   }
-
 
   // obtener todos los espacios del API
   getAllEspacios() {
     this.espacioService.obtenerEspacios().subscribe(data => {
       this.espacios = data;
-    })
+    });
   }
 
 /*   listaEspacios: Espacio[] = [

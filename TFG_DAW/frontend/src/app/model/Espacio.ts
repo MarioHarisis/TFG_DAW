@@ -1,4 +1,5 @@
 import { Reserva } from "./Reserva";
+import { Usuario } from "./Usuario";
 
 export class Espacio {
   id?: number;
@@ -11,7 +12,8 @@ export class Espacio {
     public precio: number,
     public disponible: boolean,
     public imagen: string,
-    public reservas: Reserva[]  // Aquí agregamos la lista de reservas
+    public usuarioId: number,
+    public reservas?: Reserva[]  // Aquí agregamos la lista de reservas
   ) {}
   
 }

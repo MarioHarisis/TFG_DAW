@@ -3,6 +3,10 @@ body {
   /* PRINCIPAL PURPLE 240046*/
 }
 
+.nav-link {
+  cursor: pointer;
+}
+
 /* Cards */
 .card {
   border: 2px solid white;

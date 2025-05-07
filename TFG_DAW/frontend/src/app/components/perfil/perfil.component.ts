@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Usuario } from '../../model/Usuario';
-import { UsuarioService } from '../../services/usuario.service';
+import { AuthService } from '../../services/auth.service';
+import { AlertasService } from '../../services/alertas.service';
+
 
 @Component({
   selector: 'app-perfil',
@@ -10,25 +12,37 @@ import { UsuarioService } from '../../services/usuario.service';
 })
 export class PerfilComponent {
 
-  usuarios: Usuario[] = []; // Array para almacenar los usuarios
-  usuario!: Usuario;
+  // solo intenta acceder a sus propiedades si usuario ya está definido
+  usuario?: Usuario;
 
-  constructor(private usuarioService: UsuarioService){
+  constructor(private authService: AuthService, private alertasService: AlertasService){
   }
 
   ngOnInit(): void {
-    // llamar al servicio y obtener usuarios
-    this.usuarioService.getUsuarios().subscribe(
-      (data: Usuario[]) => {
-        this.usuarios = data;
-        this.usuario = this.usuarios[0];
-        console.log(this.usuarios);
-        
-      },
-      (error) => {
-        console.error('Hubo un problema al obtener usuarios:', error);
-        
+
+    // comprobar logeo
+    if (this.authService.estaLogeado()) {
+      // obtener usuario desde la sesion
+      const usuarioSesion = sessionStorage.getItem('usuario');
+      // si existe la sesion
+      if (usuarioSesion) {
+        /*
+        El valor en sessionStorage se guarda como texto. 
+        Aquí lo parseamos a un objeto JavaScript.
+         En sessionStorage: '{"id":1,"nombre":"Usuario","email":"usuario@gmail.com"}'
+         Con JSON.parse() se convierte en:
+         { id: 1, nombre: "Mario", email: "mario@gmail.com" } as Usuario (como tipo Usuario)
+          */
+        this.usuario = JSON.parse(usuarioSesion) as Usuario;
       }
-    )
+    }
+  }
+
+  // cerrar sesión en el perfil
+  logoutPerfil():void {
+    // mostrar aviso de confirmación
+    this.alertasService.alertaPers('warning','¿Cerrar sesión?', '',true ,'/home');
+    // cerrar sesión
+    this.authService.logout();
   }
 }

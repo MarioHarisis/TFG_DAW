@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { EspacioService } from '../../services/espacio.service';
 import { Espacio } from '../../model/Espacio';
 import Swal from 'sweetalert2';
+import { AlertasService } from '../../services/alertas.service';
 
 @Component({
   selector: 'app-agregar',
@@ -12,12 +13,13 @@ import Swal from 'sweetalert2';
 export class AgregarComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-  espacio: Espacio = new Espacio('', '', '', 0, 0, true, '', []);
+  espacio: Espacio = new Espacio('', '', '', 0, 0, true, '', 0
+    ,[]);
   imagenFile!: File;
 
   enviando = false; // desactivar botón mientras se completa el envío para evitar problemas
 
-  constructor(private espacioService: EspacioService){}
+  constructor(private espacioService: EspacioService, private alertasService: AlertasService){}
 
   // // comprobar y asignar el archivo imagen cuando detecta una carga
   onFileChange(event: any): void {
@@ -36,9 +38,20 @@ export class AgregarComponent {
         text: "Debes subir una imagen",
         icon: "error"
       });
-
       return; // volver si no se ha cargado la imagen
     }
+
+    // verificar usuario en sesion
+    const usuarioSession = sessionStorage.getItem('usuario');
+    if (!usuarioSession) {
+      this.alertasService.alertaPers('error','Sesión expìrada','Debes iniciar sesión para publicar un espacio',false,'');
+      return;
+    }
+
+    // Pasar usuario y asignar el ID al Espacio
+    const usuario = JSON.parse(usuarioSession);
+    this.espacio.usuarioId = usuario.id;
+
 
     this.enviando = true;
     // creación del Espacio en backend
@@ -46,37 +59,24 @@ export class AgregarComponent {
       next: (res) => {
         if (res) {
           this.enviando = false;
-
-          Swal.fire({
-            title: "Espacio creado correctamente",
-            icon: "success",
-            draggable: true
-          });
+          this.alertasService.alertaPers('success','Espacio creado correctamente','',false,'/perfil');
           // limpiar formulario
           this.limpiarFormulario();
         }else {
           // si no se crea el espacio
-          Swal.fire({
-            title: "Oops...",
-            text: "Error al crear Espacio",
-            icon: "error"
-          });
+          this.alertasService.alertaPers('error','Oops..','Error al crear Espacio',false,'');
         }
       },
       error: (err) => {
         this.enviando = false;
-
-        Swal.fire({
-          title: "Oops...",
-          text: "Error al crear Espacio",
-          icon: "error"
-        });
+        this.alertasService.alertaPers('error','Oops..','Error al crear Espacio 2',false,'');
       }
     })
   }
 
+
   limpiarFormulario(): void {
-    this.espacio = new Espacio('', '', '', 0, 0, true, '', []);
+    this.espacio = new Espacio('', '', '', 0, 0, true, '',0 , []);
     this.imagenFile = undefined!;
     this.fileInput.nativeElement.value = ''; // limpiar el input de tipo file
   }

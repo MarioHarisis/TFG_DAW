@@ -24,6 +24,7 @@ export class EspacioService {
     formData.append('capacidad', espacio.capacidad.toString());
     formData.append('disponible', espacio.disponible ? 'true' : 'false');
     formData.append('imagen', imagen);
+    formData.append('usuarioId', espacio.usuarioId.toString());
 
     return this.http.post<Espacio>(this.apiUrl, formData);
   }

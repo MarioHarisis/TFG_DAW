@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { Usuario } from '../../model/Usuario';
+import { AlertasService } from '../../services/alertas.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,11 @@ export class LoginComponent {
   password = '';
   isFlipped = false;
 
-  constructor(private usuarioService: UsuarioService){};
+  constructor(
+    private usuarioService: UsuarioService, 
+    private router: Router, 
+    private alertasService: AlertasService
+  ){};
   
   toggleFlip() {
     this.isFlipped = !this.isFlipped;
@@ -22,21 +29,32 @@ export class LoginComponent {
   // fomrulario login
   onLogin() {
     this.usuarioService.login(this.email, this.password).subscribe({
-      next: (res) => {
-                  Swal.fire({
-                    title: "Usuario logeado correctamente",
-                    icon: "success",
-                  });
+      next: (res: Usuario) => {
+        
+        /* 
+        Guardar Usuario en sessionStorage
+
+        Convierte el objeto res (que contiene los datos del usuario) a una cadena de texto en formato JSON.
+        res viene como Objeto de tipo Usuario
+
+        JSON.stringify(res) lo convierte en:
+        '{"id":1,"nombre":"Usuario","email":"usuario@gmail.com"}'
+
+        Esto es necesario porque sessionStorage solo puede guardar datos como strings.
+        Se podría hacer tambien con un paso previo:
+        
+        const usuarioSesion = JSON.stringify(res);
+        sessionStorage.setItem('usuario',usuarioSesion);
+        */
+        sessionStorage.setItem('usuario', JSON.stringify(res));
+        console.log('sesion guardada');
+        
+        // mostrar alerta y redirigir a Home
+        this.alertasService.alertaPers('success',`¡Bienvenido ${res.nombre}!`, '',false,'/home');
       },
       error: (err) => {
-              Swal.fire({
-                title: "Oops...",
-                text: "Usuario o contraseña incorrecto/s",
-                icon: "error"
-              });
+        this.alertasService.alertaPers('error','Oops...', 'Usuario o contraseña incorrecto/s',false,'');
       }
     });
     }
-
-
 }

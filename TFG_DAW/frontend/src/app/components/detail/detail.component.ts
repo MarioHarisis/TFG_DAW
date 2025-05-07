@@ -11,7 +11,7 @@ import { Espacio } from '../../model/Espacio';
 })
 export class DetailComponent {
 
-  espacio: Espacio = new Espacio('', '', '', 0, 0, true, '', []);
+  espacio: Espacio = new Espacio('', '', '', 0, 0, true, '',0 , []);
 
   // ActivatedRoute nos da acceso a la información de la ruta activa
   constructor(private espacioService : EspacioService, private router: ActivatedRoute){

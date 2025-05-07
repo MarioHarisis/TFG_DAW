@@ -13,19 +13,24 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
+  /* Solicitudes que se envían al UsuarioController */
+
     // Obtener todos los usuarios
     getUsuarios(): Observable<Usuario[]> {
       return this.http.get<Usuario[]>(this.apiUrl);
     }
 
-    login(email: string, password: string){
-      return this.http.post(`${this.apiUrl}/login`, {email, password});
+    // solicitud de login de usuario
+    login(email: string, password: string): Observable<Usuario>{
+      return this.http.post<Usuario>(`${this.apiUrl}/login`, {email, password});
     }
 
+    // solicitud de registro de usuario
     registro(usuario : Usuario){
       return this.http.post(`${this.apiUrl}/registro`, usuario );
     }
 
+    // solicitud de logout de usuario
     logout() {
       return this.http.post(`${this.apiUrl}/logout`, {});
     }
