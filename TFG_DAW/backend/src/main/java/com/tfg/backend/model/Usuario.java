@@ -26,5 +26,4 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     private List<Reserva> reservas;
-
 }

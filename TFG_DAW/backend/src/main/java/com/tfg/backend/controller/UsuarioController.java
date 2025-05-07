@@ -21,13 +21,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+    /* Gestion de las solicitudes recibidas desde el frontend */
+
     private UsuarioRepository usuarioRepository;
 
     private UsuarioService usuarioService;
 
     // constructor
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(UsuarioService usuarioService, UsuarioRepository usuarioRepository) {
         this.usuarioService = usuarioService;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @PostMapping("/register")
@@ -49,14 +52,15 @@ public class UsuarioController {
         return ResponseEntity.ok("Sesión cerrada");
     }
 
+    @GetMapping
+    public List<Usuario> listarUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
     @Data
     static class LoginRequest {
         private String email;
         private String password;
     }
 
-    @GetMapping
-    public List<Usuario> listarUsuarios() {
-        return usuarioRepository.findAll();
-    }
 }

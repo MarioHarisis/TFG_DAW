@@ -24,12 +24,16 @@ public class Espacio {
     @Lob // marcar este campo como un tipo de datos de gran tamaño
     private String imagen;
 
+    // almacenar solo el usuarioId por temas de ciclos infinitos
+    @Column(name = "usuario_id")
+    private Long usuarioId; // Solo almacenamos el ID del usuario
+
     @OneToMany(mappedBy = "espacio")
-    private List<Reserva> reservas;
+    private List<Reserva> reservas; // Reservas asociadas a este espacio
 
     // Constructor adicional para inicializar todos los campos
     public Espacio(String nombre, String ubicacion, String descripcion, int capacidad, Double precio,
-            boolean disponible, String imagen, List<Reserva> reservas) {
+            boolean disponible, String imagen, Long usuarioId, List<Reserva> reservas) {
         this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.descripcion = descripcion;
@@ -37,6 +41,7 @@ public class Espacio {
         this.precio = precio;
         this.disponible = disponible;
         this.imagen = imagen;
+        this.usuarioId = usuarioId;
         this.reservas = reservas;
     }
 }

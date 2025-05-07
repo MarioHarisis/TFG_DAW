@@ -1,5 +1,7 @@
 package com.tfg.backend.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -17,4 +19,7 @@ import com.tfg.backend.model.Espacio;
  * DELETE /espacios/{id}: Para eliminar un producto por su ID.
  */
 public interface EspacioRepository extends JpaRepository<Espacio, Long> {
+
+    // Método para encontrar los espacios publicados por un usuario
+    List<Espacio> findByUsuarioId(Long usuarioId);
 }

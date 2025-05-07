@@ -29,11 +29,13 @@ public class EspacioService {
 
     // Crear un nuevo espacio con imagen
     public Espacio crearEspacio(String nombre, String descripcion, String ubicacion, Double precio, int capacidad,
-            boolean disponible, MultipartFile imagen) {
+            boolean disponible, MultipartFile imagen, Long usuarioId) {
         // Guardar la imagen y obtener la URL
         String imagenUrl = saveImage(imagen);
         // Crear un objeto de tipo Espacio
-        Espacio espacio = new Espacio(nombre, ubicacion, descripcion, capacidad, precio, disponible, imagenUrl, null);
+        Espacio espacio = new Espacio(nombre, ubicacion, descripcion, capacidad, precio, disponible, imagenUrl,
+                usuarioId,
+                null);
         // Guardar el espacio en la base de datos
         return espacioRepository.save(espacio);
     }
@@ -73,5 +75,10 @@ public class EspacioService {
     // Obtener un espacio por ID
     public Optional<Espacio> obtenerEspacioPorId(Long id) {
         return espacioRepository.findById(id);
+    }
+
+    // Obtener los espacios de un usuario específico
+    public List<Espacio> obtenerEspaciosPorUsuario(Long usuarioId) {
+        return espacioRepository.findByUsuarioId(usuarioId); // Buscar Espacio por ID de Usuario
     }
 }

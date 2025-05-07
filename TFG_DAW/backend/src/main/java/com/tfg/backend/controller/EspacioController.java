@@ -17,11 +17,12 @@ public class EspacioController {
 
     private EspacioService espacioService;
 
+    // Constructor para inyectar el servicio
     public EspacioController(EspacioService espacioService) {
         this.espacioService = espacioService;
     }
 
-    // Crear espacio con imagen
+    // Crear un nuevo Espacio
     @PostMapping
     public ResponseEntity<Espacio> crearEspacio(
             @RequestParam("nombre") String nombre,
@@ -30,11 +31,27 @@ public class EspacioController {
             @RequestParam("precio") Double precio,
             @RequestParam("capacidad") int capacidad,
             @RequestParam("disponible") boolean disponible,
-            @RequestParam("imagen") MultipartFile imagen) {
+            @RequestParam("imagen") MultipartFile imagen,
+            @RequestParam("usuarioId") Long usuarioId) {
 
         // Aquí llamamos al método del service para crear el espacio
-        Espacio espacio = espacioService.crearEspacio(nombre, descripcion, ubicacion, precio, capacidad, disponible,
-                imagen);
+        /*
+         * En este caso, como parametro que solicitamos, solicitamos el ID del
+         * Usuario @RequestParam("usuarioId") Long usuarioId
+         * ya que lo enviamos desde el frontend, mas adelñante buscamos desde aquí y
+         * cgracias al UusarioRepository el id en la BBDD
+         * con finBtId() de esta manera somos capaces de asignar el objeto Usuario a la
+         * columna de Usuario del Espacio.
+         */
+        Espacio espacio = espacioService.crearEspacio(
+                nombre,
+                descripcion,
+                ubicacion,
+                precio,
+                capacidad,
+                disponible,
+                imagen,
+                usuarioId);
         // devolvemos el Espacio creado
         return new ResponseEntity<>(espacio, HttpStatus.CREATED);
     }
@@ -45,7 +62,7 @@ public class EspacioController {
         return espacioService.obtenerEspacios();
     }
 
-    // devolver Espacio por ID
+    // Obtener Espacio por ID
     @GetMapping("/{id}")
     public ResponseEntity<Espacio> obtenerEspacioId(@PathVariable Long id) {
         // esto significa que espacioService.findById(id) puede devolver un Optional
