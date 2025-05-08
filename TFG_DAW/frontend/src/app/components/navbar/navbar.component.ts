@@ -22,6 +22,15 @@ export class NavbarComponent {
     console.log("Estado de log:", this.logeado);
   }
 
+    // recarga o redirecciona según la siatuación
+  metodoHome() {
+    if (this.router.url == '/home') {
+      window.location.reload();
+    }else {
+      this.router.navigate(['/home']);
+    }
+  }
+
   // cerrar sesion
   logout(): void {
     this.authService.logout();

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Espacio } from '../../model/Espacio';
 import { EspacioService } from '../../services/espacio.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,57 +10,97 @@ import { EspacioService } from '../../services/espacio.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
+  
   espacios : Espacio[] =[];
   existeSesion: boolean = false;
+  cargando: boolean = true;
 
-  constructor(private espacioService : EspacioService){}
-
-  ngOnInit(): void {
-    this.getAllEspacios();
-    /*if (typeof window !== 'undefined') se utiliza para verificar si el objeto window 
-     * está disponible en el entorno de ejecución. Esto es útil en aplicaciones Angular 
-     * para asegurarse de que el código se está ejecutando en el navegador y no en 
-     * el servidor (como durante el server-side rendering o en pruebas automáticas). 
-     * 
-     * typeof window devuelve 'object' si estás en un navegador (donde window existe).
-     * Si estás en un entorno donde window no existe 
-     * (por ejemplo, en Node.js durante la renderización en servidor), devuelve 'undefined'.
-     * */
-    if (typeof window !== 'undefined') {
-      // si existe un usuario guardado en la sesión
-      if (sessionStorage.getItem('usuario')) {
-        this.existeSesion = true;
-        console.log("HOME: Existe sesion");
-      }
-    }else {
-      console.log("HOME: Sin sesión iniciada");
+  // onBuscar
+  espaciosFiltrados : Espacio [] = [];
+  terminoBusqueda: string = ''; // Búsqueda por nombre o categoría
+  categoriaSeleccionada: string = ''; // Filtro de categoría
+  
+    private _capacidadSeleccionada: number = 0;
+  
+    get capacidadSeleccionada(): number {
+      return this._capacidadSeleccionada;
     }
-  }
+    
+    set capacidadSeleccionada(valor: number) {
+      this._capacidadSeleccionada = valor;
+    
+      if (this.categoriaSeleccionada) {
+        this.buscarPorCategoria(this.categoriaSeleccionada);
+      } else {
+        this.espaciosFiltrados = this.espacios.filter((espacio) =>
+          this.filtrarPorCapacidad(espacio.capacidad)
+        );
+      }
+    }
+  
+  constructor(private espacioService : EspacioService, private authService: AuthService){}
 
-  // obtener todos los espacios del API
-  getAllEspacios() {
+  
+  ngOnInit(): void {
+    this.espacios = []; // limpiar espacios
+
     this.espacioService.obtenerEspacios().subscribe(data => {
       this.espacios = data;
+      this.espaciosFiltrados = [...data]; //copia de data a espaciosFiltrados
+      this.cargando = false;
+    });
+
+    // comprobar sesion del usuario
+    this.existeSesion = this.authService.estaLogeado();
+  }
+
+  // filtrar Espacios por categoría
+  onBuscar(event: Event): void {
+    event.preventDefault(); // Prevenir recarga
+  
+    const busqueda = this.terminoBusqueda.toLowerCase();
+    // usar la lista de espacios para generar la nueva lista filtrada
+    this.espaciosFiltrados = this.espacios.filter((espacio) => {
+      // comprobar si coinciden nombre, catgeoria, capacidad
+      const nombreCoincide = espacio.nombre.toLowerCase().includes(busqueda);
+      const categoriaCoincide = espacio.categoria.toLowerCase().includes(busqueda);
+      const capacidadCoincide = this.filtrarPorCapacidad(espacio.capacidad);
+
+      // devolver SOLO si coincide la cantidad y el nombre o la categoría
+      return capacidadCoincide && (nombreCoincide || categoriaCoincide);
     });
   }
 
-/*   listaEspacios: Espacio[] = [
-    new Espacio("Meeting room", "Best meeting room", 7, "https://plus.unsplash.com/premium_photo-1661757413819-2ca3fb499c0d?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-    new Espacio("Bowling", "Best bowlin in town", 10, "https://images.unsplash.com/photo-1650313525165-40c8132c0ae0?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-    new Espacio("Private Studio", "Music Studio Chill", 10, "https://wallpapercave.com/wp/wp10286061.jpg"),
-    new Espacio("Billars & Co", "Have the best time in here", 10, "https://images.unsplash.com/photo-1585703900437-c2d7b85dff59?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ),
-    new Espacio("Football pitch", "A fantastic natural football pitch", 22, "https://images.unsplash.com/photo-1521534309669-61575d0047fb?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-    new Espacio("Pool Party", "Enjoy life! And... sun", 22, "https://images.unsplash.com/photo-1587870306141-4f19861e6c73?q=80&w=1892&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-    new Espacio("Sauna-Spa", "Relax time", 22, "https://images.unsplash.com/photo-1701875282743-6c42c0378bae?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-/*     new Espacio("Golf Club", "Golf Club for the highest standars", 22, "https://images.unsplash.com/photo-1505413461823-c5628c330608?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"), */
+  // buscar solo por categoría
+  buscarPorCategoria(categoria: string): void {    
+    this.categoriaSeleccionada = categoria; 
+    // si la categoria y la capacidad coinciden, o si no se ha seleccionado capacidad
+    this.espaciosFiltrados = this.espacios.filter((espacio) => 
+      espacio.categoria === categoria && 
+    (this.capacidadSeleccionada === 0 || this.filtrarPorCapacidad(espacio.capacidad)));
+    console.log(this.espaciosFiltrados);
+  }
 
-/* new Espacio("Meeting room", "Best meeting room", 7, "https://plus.unsplash.com/premium_photo-1661757413819-2ca3fb499c0d?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-new Espacio("Bowling", "Best bowlin in town", 10, "https://images.unsplash.com/photo-1650313525165-40c8132c0ae0?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-new Espacio("Private Studio", "Music Studio Chill", 10, "https://wallpapercave.com/wp/wp10286061.jpg"),
-new Espacio("Billars & Co", "Have the best time in here", 10, "https://images.unsplash.com/photo-1585703900437-c2d7b85dff59?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ),
-new Espacio("Football pitch", "A fantastic natural football pitch", 22, "https://images.unsplash.com/photo-1521534309669-61575d0047fb?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-new Espacio("Pool Party", "Enjoy life! And... sun", 22, "https://images.unsplash.com/photo-1587870306141-4f19861e6c73?q=80&w=1892&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-new Espacio("Sauna-Spa", "Relax time", 22, "https://images.unsplash.com/photo-1701875282743-6c42c0378bae?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-  ]; */
+  // filtrar por capacidad
+  filtrarPorCapacidad(capacidad: number): boolean {
+    switch (this.capacidadSeleccionada) {
+      case 10:
+        return capacidad <= 10;
+      case 50:
+        return capacidad > 10 && capacidad <= 50;
+      case 51:
+        return capacidad > 50;
+      default:
+        return true; // si no se selecciona ninguna, aceptar todas
+    }
+  }
+
+  // resetear los filtros
+  // Resetear filtros
+  resetearFiltros(): void {
+    this.capacidadSeleccionada = 0; // Limpiar el filtro de capacidad
+    this.categoriaSeleccionada = ''; // Limpiar el filtro de categoría
+    this.terminoBusqueda = ''; // Limpiar término de búsqueda
+    this.espaciosFiltrados = [...this.espacios]; // Mostrar todos los espacios
+  }
 }

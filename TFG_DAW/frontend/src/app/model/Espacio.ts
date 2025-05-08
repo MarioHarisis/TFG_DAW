@@ -1,15 +1,15 @@
 import { Reserva } from "./Reserva";
-import { Usuario } from "./Usuario";
 
 export class Espacio {
-  id?: number;
+  id!: number;
 
   constructor(
     public nombre: string,
-    public ubicacion: string,
     public descripcion: string,
+    public categoria:string,
+    public ubicacion: string,
     public capacidad: number,
-    public precio: number,
+    public precio: number | null,
     public disponible: boolean,
     public imagen: string,
     public usuarioId: number,

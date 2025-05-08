@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Usuario } from '../model/Usuario';
 import { Observable, retry } from 'rxjs';
+import { Espacio } from '../model/Espacio';
 
 @Injectable({
   providedIn: 'root'

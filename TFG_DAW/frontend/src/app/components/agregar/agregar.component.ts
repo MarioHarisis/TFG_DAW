@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { EspacioService } from '../../services/espacio.service';
 import { Espacio } from '../../model/Espacio';
-import Swal from 'sweetalert2';
 import { AlertasService } from '../../services/alertas.service';
 
 @Component({
@@ -13,8 +12,7 @@ import { AlertasService } from '../../services/alertas.service';
 export class AgregarComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-  espacio: Espacio = new Espacio('', '', '', 0, 0, true, '', 0
-    ,[]);
+  espacio: Espacio = new Espacio('', '', '', '',0, null, true, '', 0,[]);
   imagenFile!: File;
 
   enviando = false; // desactivar botón mientras se completa el envío para evitar problemas
@@ -31,13 +29,15 @@ export class AgregarComponent {
   // enviar datos del formulario
   submit(): void{
 
+    // avisar si falta algún campo por seleccionar
+    if (this.comprobarFormulario()) {
+      this.alertasService.alertaPers('info','Falta algún campo por rellenar', 'Revisa los campos del formulario.', false,'');
+      return;
+    }
+
     // comprobar que existe la imagen
     if (!this.imagenFile) {
-      Swal.fire({
-        title: "Oops...",
-        text: "Debes subir una imagen",
-        icon: "error"
-      });
+      this.alertasService.alertaPers('info', 'Debes subir una imagen', 'Sube una imagen de tu Espacio', false,'');
       return; // volver si no se ha cargado la imagen
     }
 
@@ -52,13 +52,13 @@ export class AgregarComponent {
     const usuario = JSON.parse(usuarioSession);
     this.espacio.usuarioId = usuario.id;
 
-
+    // boton deshabilidato para evitar peticiones excesivas
     this.enviando = true;
     // creación del Espacio en backend
     this.espacioService.crearEspacio(this.espacio, this.imagenFile).subscribe({
       next: (res) => {
         if (res) {
-          this.enviando = false;
+          this.enviando = false; // boton reactivado despues de realizar el envío
           this.alertasService.alertaPers('success','Espacio creado correctamente','',false,'/perfil');
           // limpiar formulario
           this.limpiarFormulario();
@@ -75,8 +75,19 @@ export class AgregarComponent {
   }
 
 
+  // comprobar si hay campos vacíos en el formulario
+  comprobarFormulario(): boolean {
+    return !this.espacio.nombre.trim() ||
+           !this.espacio.descripcion.trim() ||
+           !this.espacio.categoria.trim() ||
+           !this.espacio.ubicacion.trim() ||
+           !this.espacio.precio ||
+           !this.espacio.capacidad;
+  }
+  
+
   limpiarFormulario(): void {
-    this.espacio = new Espacio('', '', '', 0, 0, true, '',0 , []);
+    this.espacio = new Espacio('', '','', '', 0, 0, true, '',0 , []);
     this.imagenFile = undefined!;
     this.fileInput.nativeElement.value = ''; // limpiar el input de tipo file
   }

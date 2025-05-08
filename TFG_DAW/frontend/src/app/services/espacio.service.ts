@@ -19,9 +19,10 @@ export class EspacioService {
     const formData = new FormData();
     formData.append('nombre', espacio.nombre);
     formData.append('descripcion', espacio.descripcion);
+    formData.append('categoria', espacio.categoria);
     formData.append('ubicacion', espacio.ubicacion);
-    formData.append('precio', espacio.precio.toString());
-    formData.append('capacidad', espacio.capacidad.toString());
+    formData.append('precio', Number(espacio.precio).toString());
+    formData.append('capacidad', Number (espacio.capacidad).toString());
     formData.append('disponible', espacio.disponible ? 'true' : 'false');
     formData.append('imagen', imagen);
     formData.append('usuarioId', espacio.usuarioId.toString());
@@ -38,5 +39,15 @@ export class EspacioService {
     obtenerEspacioId(id : number): Observable<Espacio> {
       const url = `${this.apiUrl}/${id}`; // url que hará la peticion GET al mapeo en back
       return this.http.get<Espacio>(url);
+    }
+
+    // eliminar un espacio por su ID
+    eliminarEspacio(id: number): Observable<void> {
+      return this.http.delete<void>(`${this.apiUrl}/${id}`); // @DeleteMapping DELETE /espacios/{id}
+    }
+
+    // solicitud de todos los espacios pasando id del usuario
+    obtenerEspaciosPorUsuario(id: number): Observable<Espacio[]> {
+      return this.http.get<Espacio[]>(`${this.apiUrl}/usuarios/${id}`);
     }
 }

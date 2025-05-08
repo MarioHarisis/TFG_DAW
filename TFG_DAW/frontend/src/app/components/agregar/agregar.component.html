@@ -30,7 +30,26 @@
           maxlength="200"
           placeholder="Cuéntanos sobre tu espacio..."
           [(ngModel)]="espacio.descripcion"
+          required
         ></textarea>
+      </div>
+      <!-- descrripcion -->
+      <div class="mb-3">
+        <label for="categoria" class="form-label">Categoria</label>
+        <select
+          class="form-control"
+          name="categoria"
+          id="categoria"
+          [(ngModel)]="espacio.categoria"
+          required=""
+        >
+          <option value="" disabled hidden>Selecciona categoria</option>
+          <option value="deporte">Deporte</option>
+          <option value="Spa">Spa</option>
+          <option value="gaming">Gaming</option>
+          <option value="musica">Musica</option>
+          <option value="bussiness">Bussiness</option>
+        </select>
       </div>
       <!-- ubicacion -->
       <div class="mb-3">
