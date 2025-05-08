@@ -15,8 +15,9 @@ public class Espacio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String ubicacion;
     private String descripcion;
+    private String categoria;
+    private String ubicacion;
     private int capacidad;
     private Double precio;
     private boolean disponible;
@@ -32,11 +33,12 @@ public class Espacio {
     private List<Reserva> reservas; // Reservas asociadas a este espacio
 
     // Constructor adicional para inicializar todos los campos
-    public Espacio(String nombre, String ubicacion, String descripcion, int capacidad, Double precio,
+    public Espacio(String nombre, String categoria, String descripcion, String ubicacion, int capacidad, Double precio,
             boolean disponible, String imagen, Long usuarioId, List<Reserva> reservas) {
         this.nombre = nombre;
-        this.ubicacion = ubicacion;
         this.descripcion = descripcion;
+        this.categoria = categoria;
+        this.ubicacion = ubicacion;
         this.capacidad = capacidad;
         this.precio = precio;
         this.disponible = disponible;

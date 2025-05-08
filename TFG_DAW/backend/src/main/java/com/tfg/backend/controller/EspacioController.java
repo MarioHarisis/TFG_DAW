@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tfg.backend.model.Espacio;
 import com.tfg.backend.service.EspacioService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/espacios")
@@ -27,6 +29,7 @@ public class EspacioController {
     public ResponseEntity<Espacio> crearEspacio(
             @RequestParam("nombre") String nombre,
             @RequestParam("descripcion") String descripcion,
+            @RequestParam("categoria") String categoria,
             @RequestParam("ubicacion") String ubicacion,
             @RequestParam("precio") Double precio,
             @RequestParam("capacidad") int capacidad,
@@ -46,6 +49,7 @@ public class EspacioController {
         Espacio espacio = espacioService.crearEspacio(
                 nombre,
                 descripcion,
+                categoria,
                 ubicacion,
                 precio,
                 capacidad,
@@ -79,4 +83,25 @@ public class EspacioController {
         }
     }
 
+    // Obtener todos los Espacios de un Usuario por su usuarioId
+    @GetMapping("/usuarios/{usuarioId}")
+    public ResponseEntity<List<Espacio>> obtenerEspaciosPorUsuario(@PathVariable Long usuarioId) {
+        List<Espacio> espacios = espacioService.obtenerEspaciosPorUsuario(usuarioId);
+
+        if (espacios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(espacios);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarEspacio(@PathVariable Long id) {
+        try {
+            // eliminar espacio por ID
+            espacioService.eliminarEspacio(id);
+            return ResponseEntity.noContent().build(); // devolver una respuesta No Content
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build(); // devolver una respuesta Not FOund
+        }
+    }
 }

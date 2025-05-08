@@ -2,6 +2,9 @@ package com.tfg.backend.service;
 
 import com.tfg.backend.model.Espacio;
 import com.tfg.backend.repository.EspacioRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -28,16 +31,28 @@ public class EspacioService {
     }
 
     // Crear un nuevo espacio con imagen
-    public Espacio crearEspacio(String nombre, String descripcion, String ubicacion, Double precio, int capacidad,
+    public Espacio crearEspacio(String nombre, String descripcion, String categoria, String ubicacion, Double precio,
+            int capacidad,
             boolean disponible, MultipartFile imagen, Long usuarioId) {
         // Guardar la imagen y obtener la URL
         String imagenUrl = saveImage(imagen);
         // Crear un objeto de tipo Espacio
-        Espacio espacio = new Espacio(nombre, ubicacion, descripcion, capacidad, precio, disponible, imagenUrl,
+        Espacio espacio = new Espacio(nombre, categoria, descripcion, ubicacion, capacidad, precio, disponible,
+                imagenUrl,
                 usuarioId,
                 null);
         // Guardar el espacio en la base de datos
         return espacioRepository.save(espacio);
+    }
+
+    // eliminar un espacio por su ID
+    public void eliminarEspacio(Long id) {
+        // comprobar que existe ese ID
+        if (!espacioRepository.existsById(id)) {
+            throw new EntityNotFoundException("Espacio no encontrado con ID: " + id);
+        }
+        espacioRepository.deleteById(id);
+        // TO DO: eliminar imagen asociada a espacio de la carpeta
     }
 
     // Método para guardar la imagen en el directorio y obtener la URL
