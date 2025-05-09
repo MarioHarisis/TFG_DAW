@@ -24,7 +24,6 @@
     color: white;
     border-radius: 10px;
     max-height: 30px;
-    padding: 10px;
   }
   .carousel-control-prev-icon,
    .carousel-control-next-icon{
@@ -34,10 +33,10 @@
   }
   
   .card-body-detail {
-      background-color: #240046;
-      border-radius: 15px 15px 0 0;
-    }
-
+    background-color: #240046;
+    border-radius: 0 0 15px 15px;
+    padding: 10px;
+  }
     /* Carousel */
     .carousel-control-prev-icon:hover,
     .carousel-control-next-icon:hover{

@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class EspacioService {
 
   private apiUrl = `${environment.apiBaseUrl}/espacios`;  // URL del API
+  private espaciosEnService: Espacio [] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -50,4 +51,14 @@ export class EspacioService {
     obtenerEspaciosPorUsuario(id: number): Observable<Espacio[]> {
       return this.http.get<Espacio[]>(`${this.apiUrl}/usuarios/${id}`);
     }
+
+
+  // GETTER N SETTER
+  set espacios(espacios: Espacio[]) {
+    this.espaciosEnService = espacios;
+  }
+  
+  get espacios(): Espacio[]{
+    return this.espaciosEnService;
+  }
 }

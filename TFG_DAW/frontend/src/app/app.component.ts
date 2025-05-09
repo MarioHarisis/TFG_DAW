@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EspacioService } from './services/espacio.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+
+  constructor(private espacioService : EspacioService){}
+
+  ngOnInit(): void {
+    // Cargar todos los Espacios cuando se inicie la app
+    this.espacioService.obtenerEspacios().subscribe((data) => this.espacioService.espacios = data);
+  }
 }

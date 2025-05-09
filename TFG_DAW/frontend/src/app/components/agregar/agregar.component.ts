@@ -59,6 +59,7 @@ export class AgregarComponent {
       next: (res) => {
         if (res) {
           this.enviando = false; // boton reactivado despues de realizar el envío
+          this.espacioService.espacios.push(this.espacio); // agregar también a lista del service
           this.alertasService.alertaPers('success','Espacio creado correctamente','',false,'/perfil');
           // limpiar formulario
           this.limpiarFormulario();

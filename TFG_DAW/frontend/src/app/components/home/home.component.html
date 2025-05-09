@@ -72,7 +72,13 @@
             </div>
             <!-- Buscar -->
             <div class="inputGroup">
-              <input type="text" required="" autocomplete="off" />
+              <input
+                type="text"
+                name="terminoBusqueda"
+                [(ngModel)]="terminoBusqueda"
+                required=""
+                autocomplete="off"
+              />
               <label for="name">Buscar</label>
             </div>
             <button class="btn" type="submit">
@@ -177,13 +183,16 @@
   </div>
 </div>
 
+<!-- cards de Espacios -->
 <div class="container-fluid px-4">
   <div class="d-flex flex-wrap justify-content-center gap-4">
     <div *ngFor="let item of espaciosFiltrados">
       <div class="card" [routerLink]="['/detail/' + item.id]">
         <img [src]="item.imagen" alt="Espacio-img" class="card-img" />
-        <div class="card-img-overlay d-flex p-3">
-          <h5 class="card-title">{{ item.nombre }}</h5>
+        <div class="card-img-overlay">
+          <h5 class="card-title text-center">
+            {{ item.ubicacion }} - {{ item.precio }}€/h
+          </h5>
         </div>
       </div>
     </div>

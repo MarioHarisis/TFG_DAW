@@ -33,7 +33,7 @@
           required
         ></textarea>
       </div>
-      <!-- descrripcion -->
+      <!-- categoria -->
       <div class="mb-3">
         <label for="categoria" class="form-label">Categoria</label>
         <select
@@ -61,6 +61,7 @@
           name="ubicacion"
           placeholder="¿Donde se encuentra?"
           [(ngModel)]="espacio.ubicacion"
+          maxlength="15"
         />
       </div>
       <!-- Precio -->

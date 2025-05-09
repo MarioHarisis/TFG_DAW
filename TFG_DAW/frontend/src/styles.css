@@ -19,6 +19,28 @@ body {
   transform: scale(1.05);
 }
 
+/*cards pequeñas */
+.card-mini {
+  width: 16rem;
+  height: auto;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+}
+.card-title-mini {
+  background-color: rgba(0, 0, 0, 0.5) ;
+}
+
+.card-mini .card-img-top {
+  height: 350px;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: #240046;
+}
+
 /* Listas */
 .list-group-item:hover {
   background-color: #e8e8e8;
