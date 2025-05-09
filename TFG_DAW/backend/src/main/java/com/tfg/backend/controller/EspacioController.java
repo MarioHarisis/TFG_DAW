@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tfg.backend.model.Espacio;
 import com.tfg.backend.service.EspacioService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/espacios")
@@ -102,6 +101,25 @@ public class EspacioController {
             return ResponseEntity.noContent().build(); // devolver una respuesta No Content
         } catch (Exception e) {
             return ResponseEntity.notFound().build(); // devolver una respuesta Not FOund
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Espacio> actualizarEspacio(
+            @PathVariable Long id,
+            @RequestPart("espacio") String espacioJson, // Recibe el JSON como String
+            @RequestPart(value = "imagen", required = false) MultipartFile imagen) {
+
+        try {
+
+            // Deserializar el JSON en el objeto Espacio
+            Espacio espacio = new ObjectMapper().readValue(espacioJson, Espacio.class);
+
+            Espacio actualizado = espacioService.editarEspacio(id, espacio, imagen);
+            return ResponseEntity.ok(actualizado);
+        } catch (Exception e) {
+            // si la deserializacion falla
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 }
