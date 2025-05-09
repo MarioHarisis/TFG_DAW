@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { EspacioService } from '../../services/espacio.service';
 import { Espacio } from '../../model/Espacio';
 import { AlertasService } from '../../services/alertas.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-agregar',
@@ -16,8 +17,36 @@ export class AgregarComponent {
   imagenFile!: File;
 
   enviando = false; // desactivar botón mientras se completa el envío para evitar problemas
+  modoEdicion = false;
 
-  constructor(private espacioService: EspacioService, private alertasService: AlertasService){}
+  constructor(private espacioService: EspacioService, private alertasService: AlertasService, private route: ActivatedRoute){}
+
+  ngOnInit(): void {
+    this.route.params.subscribe( params => {
+       const id = Number(params['id']);
+
+       if (id) {
+         this.modoEdicion = true;
+         this.cargarEspacio(Number(id));
+       }
+
+    });
+    
+  }
+
+  // para poder ver el espacio a Editar
+  cargarEspacio(id: number): void {
+    this.espacioService.obtenerEspacioId(id).subscribe({
+      next: (espacio) => {
+        this.espacio = espacio;
+      },
+      error: () => {
+        this.alertasService.alertaPers('error','Error','No se pudo cargar el Espacio.',false,'');
+      }
+    });
+  }
+
+  
 
   // // comprobar y asignar el archivo imagen cuando detecta una carga
   onFileChange(event: any): void {
@@ -36,7 +65,7 @@ export class AgregarComponent {
     }
 
     // comprobar que existe la imagen
-    if (!this.imagenFile) {
+    if (!this.imagenFile && !this.modoEdicion) {
       this.alertasService.alertaPers('info', 'Debes subir una imagen', 'Sube una imagen de tu Espacio', false,'');
       return; // volver si no se ha cargado la imagen
     }
@@ -54,25 +83,41 @@ export class AgregarComponent {
 
     // boton deshabilidato para evitar peticiones excesivas
     this.enviando = true;
-    // creación del Espacio en backend
-    this.espacioService.crearEspacio(this.espacio, this.imagenFile).subscribe({
-      next: (res) => {
-        if (res) {
-          this.enviando = false; // boton reactivado despues de realizar el envío
-          this.espacioService.espacios.push(this.espacio); // agregar también a lista del service
-          this.alertasService.alertaPers('success','Espacio creado correctamente','',false,'/perfil');
-          // limpiar formulario
-          this.limpiarFormulario();
-        }else {
-          // si no se crea el espacio
-          this.alertasService.alertaPers('error','Oops..','Error al crear Espacio',false,'');
+
+
+    // si se quisiese editar un espacio
+    if (this.modoEdicion) {
+      this.espacioService.editarEspacio(this.espacio, this.imagenFile).subscribe({
+        next: () => {
+          this.enviando = false;
+          this.alertasService.alertaPers('success', 'Espacio actualizado', '', false, '/home');
+        },
+        error: () => {
+          this.enviando = false;
+          this.alertasService.alertaPers('error', 'Error', 'No se pudo editar el espacio.', false, '');
         }
-      },
-      error: (err) => {
-        this.enviando = false;
-        this.alertasService.alertaPers('error','Oops..','Error al crear Espacio 2',false,'');
-      }
-    })
+      });
+    }else {
+      // creación del Espacio en backend
+      this.espacioService.crearEspacio(this.espacio, this.imagenFile).subscribe({
+        next: (res) => {
+          if (res) {
+            this.enviando = false; // boton reactivado despues de realizar el envío
+            this.espacioService.espacios.push(this.espacio); // agregar también a lista del service
+            this.alertasService.alertaPers('success','Espacio creado correctamente','',false,'/home');
+            // limpiar formulario
+            this.limpiarFormulario();
+          }else {
+            // si no se crea el espacio
+            this.alertasService.alertaPers('error','Oops..','Error al crear Espacio',false,'');
+          }
+        },
+        error: (err) => {
+          this.enviando = false;
+          this.alertasService.alertaPers('error','Oops..','Error al crear Espacio 2',false,'');
+        }
+      });
+    }
   }
 
 

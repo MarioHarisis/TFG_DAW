@@ -25,7 +25,6 @@ export class HomeComponent {
     
     
     ngOnInit(): void {
-      this.espacios = []; // limpiar espacios
       this.espaciosFiltrados = this.espacioService.espacios; // Espacios a espaciosFiltrados
       this.espacios = this.espacioService.espacios; // guardar Espacios en HomeComponent
       

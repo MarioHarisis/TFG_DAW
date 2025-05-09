@@ -4,8 +4,18 @@
   class="my-5 d-flex justify-content-center align-items-center background-image"
 >
   <div class="card p-5" style="width: 70%">
-    <h3 class="fw-bold mb-4 text-center">Agregar mi espacio</h3>
+    <h3 class="fw-bold mb-4 text-center">
+      {{ modoEdicion ? "Editar mi espacio" : "Agregar mi espacio" }}
+    </h3>
     <form (ngSubmit)="submit()">
+      <div *ngIf="modoEdicion && espacio.imagen" class="mb-4 text-center">
+        <img
+          [src]="espacio.imagen"
+          alt="Imagen del espacio"
+          class="img-fluid rounded shadow-sm"
+          style="max-height: 550px; width: 80%; object-fit: cover"
+        />
+      </div>
       <!-- nombre -->
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>

@@ -31,6 +31,26 @@ export class EspacioService {
     return this.http.post<Espacio>(this.apiUrl, formData);
   }
 
+  editarEspacio(espacio: Espacio, imagen?: File): Observable<Espacio> {
+  const formData = new FormData();
+  formData.append('nombre', espacio.nombre);
+  formData.append('descripcion', espacio.descripcion);
+  formData.append('categoria', espacio.categoria);
+  formData.append('ubicacion', espacio.ubicacion);
+  formData.append('precio', Number(espacio.precio).toString());
+  formData.append('capacidad', Number(espacio.capacidad).toString());
+  formData.append('disponible', espacio.disponible ? 'true' : 'false');
+  formData.append('usuarioId', espacio.usuarioId.toString());
+
+  formData.append('espacio', JSON.stringify(espacio)); // Serializar Espacio como JSON
+
+  if (imagen) {
+    formData.append('imagen', imagen);
+  }
+
+  return this.http.put<Espacio>(`${this.apiUrl}/${espacio.id}`, formData);
+}
+
     // Obtener todos los espacios
     obtenerEspacios(): Observable<Espacio[]> {
       return this.http.get<Espacio[]>(this.apiUrl);

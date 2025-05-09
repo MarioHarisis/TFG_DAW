@@ -32,7 +32,11 @@ const routes: Routes = [
 {
   path:'agregar',
   component: AgregarComponent
-},
+}, // para creacion
+{
+  path: 'agregar/:id',
+  component: AgregarComponent
+},// para edicion
 {
   path:'error',
   component:ErrorComponent
