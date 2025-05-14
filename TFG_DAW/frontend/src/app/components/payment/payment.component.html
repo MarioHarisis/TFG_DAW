@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+
+<div class="container py-5">
+  <div class="d-flex justify-content-center my-4">
+    <!-- ETHEREUM -->
+    <div *ngIf="metodoPago == 'ethereum'">
+      <app-ethereum></app-ethereum>
+    </div>
+
+    <div *ngIf="metodoPago == 'tarjeta'">
+      <app-tarjeta></app-tarjeta>
+      <div class="d-flex justify-content-center align-items-center"></div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

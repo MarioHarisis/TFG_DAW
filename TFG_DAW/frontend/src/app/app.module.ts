@@ -13,6 +13,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { AgregarComponent } from './components/agregar/agregar.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { EthereumComponent } from './components/ethereum/ethereum.component';
+import { TarjetaComponent } from './components/tarjeta/tarjeta.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +29,17 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     DetailComponent,
     AgregarComponent,
+    CheckoutComponent,
+    PaymentComponent,
+    EthereumComponent,
+    TarjetaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [
     provideClientHydration(withEventReplay())

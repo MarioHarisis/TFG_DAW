@@ -6,6 +6,8 @@ import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { AgregarComponent } from './components/agregar/agregar.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 const routes: Routes = [
 {
@@ -37,6 +39,18 @@ const routes: Routes = [
   path: 'agregar/:id',
   component: AgregarComponent
 },// para edicion
+{
+  path: 'checkout',
+  component: CheckoutComponent
+},
+{
+  path: 'payment',
+  component: PaymentComponent
+},
+{
+  path: 'payment/:metodoPago',
+  component: PaymentComponent
+},
 {
   path:'error',
   component:ErrorComponent

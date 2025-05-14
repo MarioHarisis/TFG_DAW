@@ -1,0 +1,103 @@
+<app-navbar></app-navbar>
+<div class="container py-5">
+  <div
+    class="card shadow-lg p-4"
+    style="max-width: 600px; margin: auto; border-radius: 20px"
+  >
+    <h4 class="text-center mb-4 text-uppercase">Revisar y confirmar</h4>
+
+    <!-- DATOS DEL EVENTO / ESPACIO -->
+    <div class="mb-4">
+      <h6 class="text-purple fw-bold">Detalles de la reserva</h6>
+      <p class="mb-1">Espacio: Sala Ágora 2</p>
+      <p class="mb-1">Dirección: Calle del Sol 45, Barcelona</p>
+      <p class="mb-1">Fecha: 12 de junio de 2025</p>
+      <p class="mb-1">Horario: 10:00 – 14:00</p>
+      <p class="mb-1">Personas: 4</p>
+    </div>
+
+    <!-- DATOS PERSONALES -->
+    <div class="mb-4">
+      <h6 class="text-purple fw-bold">Datos del usuario</h6>
+      <p class="mb-1">Nombre: Álvaro Martínez</p>
+      <p class="mb-1">Email: alvaroemail.com</p>
+      <p class="mb-1">Teléfono: +34 600 123 456</p>
+    </div>
+
+    <!-- DIRECCIÓN FACTURACIÓN -->
+    <div class="mb-4">
+      <h6 class="text-purple fw-bold">Dirección de facturación</h6>
+      <p class="mb-1">Calle Mayor 123</p>
+      <p class="mb-1">Madrid, 28001</p>
+      <p class="mb-1">España</p>
+    </div>
+
+    <!-- MÉTODO DE PAGO -->
+    <div class="mb-4">
+      <h6 class="text-purple fw-bold">Método de pago</h6>
+      <div class="d-flex flex-column gap-2">
+        <form>
+          <input
+            type="radio"
+            name="metodoPago"
+            id="tarjeta"
+            class="d-none"
+            [(ngModel)]="metodoPago"
+            value="tarjeta"
+            checked
+          />
+          <label for="tarjeta" class="metodo-pago my-2">
+            <span>Tarjeta de crédito</span>
+          </label>
+
+          <input
+            type="radio"
+            name="metodoPago"
+            id="local"
+            class="d-none"
+            [(ngModel)]="metodoPago"
+            value="local"
+          />
+          <label for="local" class="metodo-pago my-2">
+            <span>Pago en el lugar</span>
+          </label>
+
+          <input
+            type="radio"
+            name="metodoPago"
+            id="ethereum"
+            class="d-none"
+            [(ngModel)]="metodoPago"
+            value="ethereum"
+          />
+          <label for="ethereum" class="metodo-pago my-2">
+            <span>Pagar con Ethereum</span>
+          </label>
+        </form>
+      </div>
+
+      <!-- COMENTARIOS -->
+      <div class="my-3">
+        <h6 class="text-purple fw-bold">Comentarios adicionales</h6>
+        <textarea
+          class="form-control"
+          rows="3"
+          placeholder="Escribe aquí alguna petición especial..."
+        ></textarea>
+      </div>
+      <!-- BOTÓN -->
+      <div class="d-grid my-3">
+        <button
+          type="submit"
+          [routerLink]="['/payment/' + metodoPago]"
+          class="btn btn-primary"
+        >
+          Proceder al pago
+        </button>
+      </div>
+    </div>
+    <!-- <div class="container col-6" *ngIf="metodoPago === 'tarjeta'"></div> -->
+  </div>
+</div>
+
+<app-footer></app-footer>

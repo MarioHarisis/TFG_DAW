@@ -16,8 +16,8 @@ export class DetailComponent {
   private espaciosCategoria: Espacio [] = [];
   
   // ActivatedRoute nos da acceso a la información de la ruta activa
-  constructor(private espacioService : EspacioService, private router: ActivatedRoute){
-    this.router.params.subscribe((params) => {
+  constructor(private espacioService : EspacioService, private route: ActivatedRoute){
+    this.route.params.subscribe((params) => {
     /* de la ruta activa obtenemos el numero ID depués lo usamos como var
     para buscar entre la lista de espacios. */
     const idEspacioUrl = params['id'];

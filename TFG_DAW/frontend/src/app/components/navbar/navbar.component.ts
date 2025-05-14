@@ -19,7 +19,6 @@ export class NavbarComponent {
   // comprobar sesión
   ngOnInit(): void {
     this.logeado = this.authService.estaLogeado();
-    console.log("Estado de log:", this.logeado);
   }
 
     // recarga o redirecciona según la siatuación
