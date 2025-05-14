@@ -8,6 +8,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { AgregarComponent } from './components/agregar/agregar.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { ReservasComponent } from './components/reservas/reservas.component';
 
 const routes: Routes = [
 {
@@ -39,6 +40,10 @@ const routes: Routes = [
   path: 'agregar/:id',
   component: AgregarComponent
 },// para edicion
+{
+  path: 'reservas',
+  component: ReservasComponent
+},
 {
   path: 'checkout',
   component: CheckoutComponent

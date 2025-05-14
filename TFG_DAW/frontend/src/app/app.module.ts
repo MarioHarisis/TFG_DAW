@@ -17,6 +17,15 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { EthereumComponent } from './components/ethereum/ethereum.component';
 import { TarjetaComponent } from './components/tarjeta/tarjeta.component';
+import { ReservasComponent } from './components/reservas/reservas.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {MatTimepickerModule} from '@angular/material/timepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -32,13 +41,21 @@ import { TarjetaComponent } from './components/tarjeta/tarjeta.component';
     CheckoutComponent,
     PaymentComponent,
     EthereumComponent,
-    TarjetaComponent
+    TarjetaComponent,
+    ReservasComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTimepickerModule,
+    MatDatepickerModule,
     
   ],
   providers: [

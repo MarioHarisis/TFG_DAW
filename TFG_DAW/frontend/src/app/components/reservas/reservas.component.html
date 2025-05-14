@@ -1,0 +1,22 @@
+<mat-card class="calendar-overlay">
+  <!-- Calendario -->
+  <mat-calendar
+    [(selected)]="selectedDate"
+    (selectedChange)="onDateChange($event)"
+    [minDate]="minDate"
+  ></mat-calendar>
+
+  <!-- Selector de hora (sin mat-select) -->
+  <div class="timepicker-wrapper">
+    <label for="horaReserva"><h5>Hora de la reserva</h5></label>
+    <select
+      class="form-select"
+      id="horaReserva"
+      (change)="onTimeChange($event)"
+    >
+      <option *ngFor="let hora of horasDisponibles" [value]="hora">
+        {{ hora }}
+      </option>
+    </select>
+  </div>
+</mat-card>
