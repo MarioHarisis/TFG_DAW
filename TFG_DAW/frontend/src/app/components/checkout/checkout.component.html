@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container py-5">
+<div *ngIf="espacio && usuario" class="container py-5">
   <div
     class="card shadow-lg p-4"
     style="max-width: 600px; margin: auto; border-radius: 20px"
@@ -9,18 +9,18 @@
     <!-- DATOS DEL EVENTO / ESPACIO -->
     <div class="mb-4">
       <h6 class="text-purple fw-bold">Detalles de la reserva</h6>
-      <p class="mb-1">Espacio: Sala Ágora 2</p>
-      <p class="mb-1">Dirección: Calle del Sol 45, Barcelona</p>
-      <p class="mb-1">Fecha: 12 de junio de 2025</p>
-      <p class="mb-1">Horario: 10:00 – 14:00</p>
-      <p class="mb-1">Personas: 4</p>
+      <p class="mb-1">Espacio: {{ espacio.nombre }}</p>
+      <p class="mb-1">Ubicación: {{ espacio.ubicacion }}</p>
+      <p class="mb-1">Fecha: {{ fechaFormateada }}</p>
+      <p class="mb-1">Horario: {{ horaFormateada }}</p>
+      <p class="mb-1">Capacidad: {{ espacio.capacidad }} personas</p>
     </div>
 
     <!-- DATOS PERSONALES -->
     <div class="mb-4">
       <h6 class="text-purple fw-bold">Datos del usuario</h6>
-      <p class="mb-1">Nombre: Álvaro Martínez</p>
-      <p class="mb-1">Email: alvaroemail.com</p>
+      <p class="mb-1">Nombre: {{ usuario.nombre }}</p>
+      <p class="mb-1">Email: {{ usuario.email }}</p>
       <p class="mb-1">Teléfono: +34 600 123 456</p>
     </div>
 
@@ -87,11 +87,7 @@
       </div>
       <!-- BOTÓN -->
       <div class="d-grid my-3">
-        <button
-          type="submit"
-          [routerLink]="['/payment/' + metodoPago]"
-          class="btn btn-primary"
-        >
+        <button type="submit" (click)="irAlPago()" class="btn btn-primary">
           Proceder al pago
         </button>
       </div>

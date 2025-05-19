@@ -1,18 +1,19 @@
-import { Component } from "@angular/core";
-import { EspacioService } from "../../services/espacio.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Espacio } from "../../model/Espacio";
-import { AlertasService } from "../../services/alertas.service";
-import { AuthService } from "../../services/auth.service";
+import { Component } from '@angular/core';
+import { EspacioService } from '../../services/espacio.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Espacio } from '../../model/Espacio';
+import { AlertasService } from '../../services/alertas.service';
+import { AuthService } from '../../services/auth.service';
+import { ReservaService } from '../../services/reserva.service';
 
 @Component({
-  selector: "app-detail",
+  selector: 'app-detail',
   standalone: false,
-  templateUrl: "./detail.component.html",
-  styleUrl: "./detail.component.css",
+  templateUrl: './detail.component.html',
+  styleUrl: './detail.component.css',
 })
 export class DetailComponent {
-  espacio: Espacio = new Espacio("", "", "", "", 0, 0, true, "", 0, []);
+  espacio: Espacio = new Espacio('', '', '', '', 0, 0, true, '', 0, []);
   private espaciosCategoria: Espacio[] = [];
   // Calendario
   mostrarCalendario: boolean = false;
@@ -24,13 +25,16 @@ export class DetailComponent {
     private route: ActivatedRoute,
     private alertasService: AlertasService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private reservaService: ReservaService
   ) {
     this.route.params.subscribe((params) => {
       /* de la ruta activa obtenemos el numero ID depués lo usamos como var
     para buscar entre la lista de espacios. */
-      const idEspacioUrl = params["id"];
-      const encontrado = this.espacioService.espacios.find((e) => e.id == idEspacioUrl);
+      const idEspacioUrl = params['id'];
+      const encontrado = this.espacioService.espacios.find(
+        (e) => e.id == idEspacioUrl
+      );
 
       if (encontrado) {
         this.espacio = encontrado;
@@ -47,41 +51,71 @@ export class DetailComponent {
     // guardar la fecha complpeta
   }
 
+  irCheckout() {
+    console.log('Navegando');
+
+    this.router.navigate(['/checkout']);
+  }
+
   reservar() {
     // primer click
     if (!this.mostrarCalendario) {
       this.mostrarCalendario = true;
-    } else {
-      // comprobar logeo
-      if (this.authService.estaLogeado()) {
-        // comprobar fecha establecida
-        if (this.fechaDeReserva) {
-          // formatear fecha para alert
-          const fechaFormateada = this.fechaDeReserva.toLocaleDateString("es-ES");
-          const horaFormateada = this.fechaDeReserva.toLocaleTimeString("es-ES", {
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-          this.alertasService.alertaPers(
-            "question",
-            "¿Confirmar reserva?",
-            `Se reservará el ${fechaFormateada} a las ${horaFormateada}`,
-            true,
-            "/checkout"
-          );
-        } else {
-          this.alertasService.alertaPers("info", "Selecciona fecha", "", false, "");
-        }
-      } else {
-        this.alertasService.alertaPers(
-          "info",
-          "¿Quieres registrarte?",
-          "Debes registrarte para poder reservar un Espacio",
-          true,
-          "/login"
-        );
-      }
+      return;
     }
+
+    // comprobar logeo
+    if (!this.authService.estaLogeado()) {
+      this.alertasService.alertaPers(
+        'info',
+        '¿Quieres registrarte?',
+        'Debes registrarte para poder reservar un Espacio',
+        true,
+        '/login'
+      );
+      return;
+    }
+
+    // comprobar fecha establecida
+    if (!this.fechaDeReserva) {
+      this.alertasService.alertaPers(
+        'info',
+        'Selecciona fecha y hora',
+        '',
+        false,
+        ''
+      );
+      return;
+    }
+
+    // formatear fecha y confirmación
+    const fechaFormateada = this.fechaDeReserva.toLocaleDateString('es-ES');
+    const horaFormateada = this.fechaDeReserva.toLocaleTimeString('es-ES', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    this.alertasService
+      .alertaPers(
+        'question',
+        '¿Confirmar reserva?',
+        `Se reservará el ${fechaFormateada} a las ${horaFormateada}`,
+        true,
+        ''
+      )
+      .then((confirmado) => {
+        console.log(this.fechaDeReserva);
+
+        if (confirmado) {
+          this.reservaService.setReserva({
+            usuarioId: this.authService.getUsuario().id,
+            espacioId: this.espacio.id,
+            fechaDeReserva: this.fechaDeReserva,
+          });
+
+          this.router.navigate(['/checkout']);
+        }
+      });
   }
 
   /* get crea un getter: una propiedad calculada que se accede como si fuera una propiedad normal, 

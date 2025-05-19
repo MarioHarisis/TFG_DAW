@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+  <!-- Calendario superior -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-8">
+      <mat-card class="p-4 calendario-card">
+        <h4 class="mb-3 text-center text-white">Calendario de reservas</h4>
+        <mat-calendar
+          [selected]="selectedDate"
+          (selectedChange)="onDateChange($event)"
+          [minDate]="minDate"
+          [dateClass]="getDateClass"
+        ></mat-calendar>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Lista de reservas -->
+  <h3 class="text-center mb-4">Mis reservas</h3>
+
+  <div *ngIf="reservas.length === 0" class="text-center text-muted">
+    No tienes reservas aÃºn.
+  </div>
+
+  <div class="row justify-content-center" *ngIf="reservas.length > 0">
+    <div class="col-md-8">
+      <div class="list-group">
+        <div
+          class="list-group-item reserva-item mb-3"
+          *ngFor="let reserva of reservas"
+        >
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="mb-1">{{ reserva.fecha | date : "fullDate" }}</h5>
+              <p class="mb-0"><strong>Hora:</strong> {{ reserva.hora }}</p>
+              <p class="mb-0"><strong>Espacio:</strong> {{ reserva.tipo }}</p>
+            </div>
+            <div class="d-flex flex-column align-items-end gap-2">
+              <button
+                class="btn btn-sm btn-outline-primary"
+                (click)="editarReserva(reserva)"
+              >
+                Editar
+              </button>
+              <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="eliminarReserva(reserva)"
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

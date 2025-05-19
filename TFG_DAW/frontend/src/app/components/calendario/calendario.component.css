@@ -1,0 +1,30 @@
+.calendario-card {
+  background-color: #240046;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.reserva-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease;
+}
+
+.reserva-item:hover {
+  transform: scale(1.01);
+}
+
+/* DÃa con reserva */
+.dia-reservado .mat-calendar-body-cell-content {
+  background-color: #9D4EDD !important;
+  color: white !important;
+  border-radius: 50%;
+  font-weight: bold;
+}
+.reserva-item .btn {
+  width: 80px;
+}

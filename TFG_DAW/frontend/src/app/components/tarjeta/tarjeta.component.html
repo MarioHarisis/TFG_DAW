@@ -139,8 +139,10 @@
       <input
         type="text"
         id="nombre"
+        name="nombre"
         class="form-control"
         placeholder="Ej: ALEJANDRO SMITH"
+        [(ngModel)]="nombre"
       />
     </div>
 
@@ -150,8 +152,11 @@
       <input
         type="text"
         id="numero"
+        name="numero"
         class="form-control"
         placeholder="4747 4747 4747 4747"
+        [(ngModel)]="numero"
+        maxlength="16"
       />
     </div>
 
@@ -159,17 +164,33 @@
     <div class="row mb-3">
       <div class="col">
         <label for="exp" class="form-label">Caducidad</label>
-        <input type="month" id="exp" class="form-control" />
+        <input
+          type="month"
+          name="expDate"
+          id="expDate"
+          [(ngModel)]="expDate"
+          class="form-control"
+        />
       </div>
       <div class="col">
         <label for="cvc" class="form-label">CVC</label>
-        <input type="text" id="cvc" class="form-control" placeholder="123" />
+        <input
+          type="number"
+          id="cvc"
+          name="cvc"
+          [(ngModel)]="cvc"
+          class="form-control"
+          placeholder="123"
+          maxlength="3"
+        />
       </div>
     </div>
 
     <!-- Botones -->
     <div class="d-grid gap-2">
-      <button class="btn btn-primary">USAR ESTA TARJETA</button>
+      <button type="submit" class="btn btn-primary" (click)="procesarPago()">
+        USAR ESTA TARJETA
+      </button>
     </div>
   </form>
 </div>

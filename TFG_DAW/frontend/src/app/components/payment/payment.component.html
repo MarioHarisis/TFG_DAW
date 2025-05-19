@@ -1,14 +1,15 @@
 <app-navbar></app-navbar>
 
-<div class="container py-5">
+<!-- para esperar a que cargue el metodo de pago antes de mostrar las opciones -->
+<div class="container py-5" *ngIf="metodoPago">
   <div class="d-flex justify-content-center my-4">
     <!-- ETHEREUM -->
-    <div *ngIf="metodoPago == 'ethereum'">
-      <app-ethereum></app-ethereum>
+    <div *ngIf="metodoPago === 'ethereum'">
+      <app-ethereum (pagoConfirmado)="confirmarPago()"></app-ethereum>
     </div>
 
-    <div *ngIf="metodoPago == 'tarjeta'">
-      <app-tarjeta></app-tarjeta>
+    <div *ngIf="metodoPago === 'tarjeta'">
+      <app-tarjeta (pagoConfirmado)="confirmarPago()"></app-tarjeta>
       <div class="d-flex justify-content-center align-items-center"></div>
     </div>
   </div>
