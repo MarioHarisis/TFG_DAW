@@ -17,7 +17,6 @@ public class UsuarioService {
 
     // registrar y guardar un nuevo usuario en la DB
     public Usuario registro(Usuario usuario) {
-        usuario.setPassword(usuario.getPassword());
         return usuarioRepository.save(usuario);
     }
 
