@@ -13,8 +13,7 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime fechaInicio;
-    private LocalDateTime fechaFin;
+    private LocalDateTime fecha;
     private String estado;
 
     @ManyToOne

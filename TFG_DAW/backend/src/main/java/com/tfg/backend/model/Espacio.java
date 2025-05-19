@@ -1,5 +1,6 @@
 package com.tfg.backend.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -30,7 +31,12 @@ public class Espacio {
     private Long usuarioId; // Solo almacenamos el ID del usuario
 
     @OneToMany(mappedBy = "espacio")
-    private List<Reserva> reservas; // Reservas asociadas a este espacio
+    private List<Reserva> reservas = new ArrayList<>(); // Reservas asociadas a este espacio
+
+    public void agregarReserva(Reserva reserva) {
+        reservas.add(reserva);
+        reserva.setEspacio(this);
+    }
 
     // Constructor adicional para inicializar todos los campos
     public Espacio(String nombre, String categoria, String descripcion, String ubicacion, int capacidad, Double precio,

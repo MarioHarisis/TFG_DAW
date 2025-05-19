@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tfg.backend.dto.EspacioDTO;
 import com.tfg.backend.model.Espacio;
+import com.tfg.backend.repository.EspacioRepository;
 import com.tfg.backend.service.EspacioService;
 
 @RestController
@@ -18,9 +20,12 @@ public class EspacioController {
 
     private EspacioService espacioService;
 
+    private EspacioRepository espacioRepository;
+
     // Constructor para inyectar el servicio
-    public EspacioController(EspacioService espacioService) {
+    public EspacioController(EspacioService espacioService, EspacioRepository espacioRepository) {
         this.espacioService = espacioService;
+        this.espacioRepository = espacioRepository;
     }
 
     // Crear un nuevo Espacio
@@ -59,23 +64,27 @@ public class EspacioController {
         return new ResponseEntity<>(espacio, HttpStatus.CREATED);
     }
 
-    // devolver todos los espacios de la DB
+    // devolver todos los espacios de la DB sin recursividad infinita
     @GetMapping
-    public List<Espacio> obtenerEspacios() {
-        return espacioService.obtenerEspacios();
+    public List<EspacioDTO> listarEspacios() {
+        return espacioRepository.findAll().stream()
+                .map(EspacioDTO::new)
+                .toList();
     }
 
     // Obtener Espacio por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Espacio> obtenerEspacioId(@PathVariable Long id) {
+    public ResponseEntity<EspacioDTO> obtenerEspacioId(@PathVariable Long id) {
         // esto significa que espacioService.findById(id) puede devolver un Optional
         Optional<Espacio> optionalEspacio = espacioService.obtenerEspacioPorId(id);
 
         // aquí comprobamos si el Optional está vacío o no
         if (optionalEspacio.isPresent()) {
-            Espacio espacio = optionalEspacio.get(); // si existe lo asignamos a un Objeto Espacio
-            // devolvemos una respuesta positiva HTTP al front
-            return ResponseEntity.ok().body(espacio);
+            // si existe lo asignamos a un Objeto EspacioDTO
+            EspacioDTO espacioDTO = new EspacioDTO(optionalEspacio.get());
+
+            // devolvemos una respuesta positiva HTTP al front del DTO
+            return ResponseEntity.ok(espacioDTO);
         } else {
             // si no lo encuentra devolvemos uan respuesta NOT FOUND
             return ResponseEntity.notFound().build();
@@ -84,13 +93,14 @@ public class EspacioController {
 
     // Obtener todos los Espacios de un Usuario por su usuarioId
     @GetMapping("/usuarios/{usuarioId}")
-    public ResponseEntity<List<Espacio>> obtenerEspaciosPorUsuario(@PathVariable Long usuarioId) {
+    public ResponseEntity<List<EspacioDTO>> obtenerEspaciosPorUsuario(@PathVariable Long usuarioId) {
         List<Espacio> espacios = espacioService.obtenerEspaciosPorUsuario(usuarioId);
 
         if (espacios.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok().body(espacios);
+        List<EspacioDTO> dtos = espacios.stream().map(EspacioDTO::new).toList();
+        return ResponseEntity.ok(dtos);
     }
 
     @DeleteMapping("/{id}")

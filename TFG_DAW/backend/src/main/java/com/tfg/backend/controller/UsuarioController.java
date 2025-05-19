@@ -1,12 +1,15 @@
 package com.tfg.backend.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tfg.backend.dto.UsuarioDTO;
 import com.tfg.backend.model.Usuario;
 import com.tfg.backend.repository.UsuarioRepository;
 import com.tfg.backend.service.UsuarioService;
@@ -33,6 +36,15 @@ public class UsuarioController {
         this.usuarioRepository = usuarioRepository;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable Long id) {
+        Optional<Usuario> usuario = usuarioService.buscarPorId(id);
+
+        return usuario
+                .map(u -> ResponseEntity.ok(new UsuarioDTO(u)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> registro(@RequestBody Usuario usuario) {
         // devolverá una respuesta OK si el registro así lo hace tambien en el Service
@@ -53,8 +65,11 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuario> listarUsuarios() {
-        return usuarioRepository.findAll();
+    public List<UsuarioDTO> listarUsuarios() {
+        return usuarioRepository.findAll()
+                .stream()
+                .map(UsuarioDTO::new)
+                .toList();
     }
 
     @Data

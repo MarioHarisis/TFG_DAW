@@ -47,6 +47,12 @@ public class EspacioService {
         return espacioRepository.save(espacio);
     }
 
+    /*
+     * @Transactional
+     * Indica que queremos que todo lo que ocurra dentro de este método debe
+     * formar parte de una única transacción. Si algo falla, se deshará (rollback)
+     * todo lo que se haya hecho hasta ese momento.
+     */
     @Transactional
     public Espacio editarEspacio(Long id, Espacio espacioEditado, MultipartFile nuevaImagen) {
         Espacio espacioExistente = espacioRepository.findById(id)

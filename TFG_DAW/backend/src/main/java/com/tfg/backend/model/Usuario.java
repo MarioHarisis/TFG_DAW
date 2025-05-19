@@ -1,5 +1,6 @@
 package com.tfg.backend.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -25,5 +26,16 @@ public class Usuario {
     private String rol;
 
     @OneToMany(mappedBy = "usuario")
-    private List<Reserva> reservas;
+    private List<Reserva> reservas = new ArrayList<>();
+
+    // Método de utilidad para mantener relación sincronizada
+    public void agregarReserva(Reserva reserva) {
+        reservas.add(reserva);
+        reserva.setUsuario(this);
+    }
+
+    public void eliminarReserva(Reserva reserva) {
+        reservas.remove(reserva);
+        reserva.setUsuario(null);
+    }
 }

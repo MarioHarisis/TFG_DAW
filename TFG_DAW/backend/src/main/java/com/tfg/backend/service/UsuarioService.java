@@ -1,5 +1,7 @@
 package com.tfg.backend.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.tfg.backend.model.Usuario;
@@ -13,6 +15,10 @@ public class UsuarioService {
     // Constructor para inyectar el repositorio
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
+    }
+
+    public Optional<Usuario> buscarPorId(Long id) {
+        return usuarioRepository.findById(id);
     }
 
     // registrar y guardar un nuevo usuario en la DB
