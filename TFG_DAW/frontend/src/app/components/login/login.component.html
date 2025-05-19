@@ -71,11 +71,7 @@
             <div class="flex-row">
               <div>
                 <div class="checkbox-wrapper">
-                  <input
-                    id="terms-checkbox-37"
-                    name="checkbox"
-                    type="checkbox"
-                  />
+                  <input id="terms-checkbox-37" name="checkbox" type="checkbox" />
                   <label class="terms-label" for="terms-checkbox-37">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -203,31 +199,12 @@
               </g>
             </svg>
             <input
+              id="nombre"
+              name="nombre"
               placeholder="Introduce tu nombre"
               class="input"
-              type="password"
-            />
-          </div>
-          <div class="flex-column">
-            <label>Apellidos</label>
-          </div>
-          <div class="inputForm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 32 32"
-            >
-              <g data-name="Layer 3" id="Layer_3">
-                <path
-                  d="M16 2a7 7 0 1 0 7 7 7 7 0 0 0 -7-7zm0 12a5 5 0 1 1 5-5 5 5 0 0 1 -5 5zm0 2c-5.33 0-10 3.08-10 7v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-3c0-3.92-4.67-7-10-7zm-8 9v-2c0-2.47 3.58-5 8-5s8 2.53 8 5v2z"
-                ></path>
-              </g>
-            </svg>
-            <input
-              placeholder="Introduce tu/s apellido/s"
-              class="input"
-              type="password"
+              type="text"
+              [(ngModel)]="nombre"
             />
           </div>
           <div class="flex-column">
@@ -247,9 +224,12 @@
               </g>
             </svg>
             <input
+              id="email"
+              name="email"
               placeholder="ejemplo@correo.com"
               class="input"
               type="email"
+              [(ngModel)]="email"
             />
           </div>
 
@@ -271,12 +251,15 @@
               ></path>
             </svg>
             <input
+              id="password"
+              name="password"
               placeholder="Introduce contraseña"
               class="input"
               type="password"
+              [(ngModel)]="password"
             />
           </div>
-          <button class="button-submit">Registrarme</button>
+          <button class="button-submit" (click)="registarUsuario()">Registrarme</button>
           <p class="text-center">
             <span class="span" (click)="toggleFlip()">Tengo cuenta</span>
           </p>

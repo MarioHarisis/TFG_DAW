@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-payment',
+  selector: "app-payment",
   standalone: false,
-  templateUrl: './payment.component.html',
-  styleUrl: './payment.component.css'
+  templateUrl: "./payment.component.html",
+  styleUrl: "./payment.component.css",
 })
-export class PaymentComponent{
-  
+export class PaymentComponent {
   metodoPago!: string;
 
-  
-  constructor( private route: ActivatedRoute){}
-  
+  constructor(private route: ActivatedRoute) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.metodoPago = params['metodoPago']; // obtener metodo de pago desde checkout
+      this.metodoPago = params["metodoPago"]; // obtener metodo de pago desde checkout
     });
+  }
+
+  confirmarPago() {
+    throw new Error("Method not implemented.");
   }
 }

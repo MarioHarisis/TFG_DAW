@@ -1,27 +1,25 @@
-import { Component } from '@angular/core';
-import { UsuarioService } from '../../services/usuario.service';
-import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
-import { Usuario } from '../../model/Usuario';
-import { AlertasService } from '../../services/alertas.service';
+import { Component } from "@angular/core";
+import { UsuarioService } from "../../services/usuario.service";
+import { Usuario } from "../../model/Usuario";
+import { AlertasService } from "../../services/alertas.service";
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
   standalone: false,
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: "./login.component.html",
+  styleUrl: "./login.component.css",
 })
 export class LoginComponent {
-  email = '';
-  password = '';
+  nombre = "";
+  email = "";
+  password = "";
   isFlipped = false;
 
   constructor(
-    private usuarioService: UsuarioService, 
-    private router: Router, 
+    private usuarioService: UsuarioService,
     private alertasService: AlertasService
-  ){};
-  
+  ) {}
+
   toggleFlip() {
     this.isFlipped = !this.isFlipped;
   }
@@ -30,7 +28,6 @@ export class LoginComponent {
   onLogin() {
     this.usuarioService.login(this.email, this.password).subscribe({
       next: (res: Usuario) => {
-        
         /* 
         Guardar Usuario en sessionStorage
 
@@ -46,15 +43,60 @@ export class LoginComponent {
         const usuarioSesion = JSON.stringify(res);
         sessionStorage.setItem('usuario',usuarioSesion);
         */
-        sessionStorage.setItem('usuario', JSON.stringify(res));
-        console.log('sesion guardada');
-        
+        sessionStorage.setItem("usuario", JSON.stringify(res));
+        console.log("sesion guardada");
+
         // mostrar alerta y redirigir a Home
-        this.alertasService.alertaPers('success',`¡Bienvenido ${res.nombre}!`, '',false,'/home');
+        this.alertasService.alertaPers(
+          "success",
+          `¡Bienvenido ${res.nombre}!`,
+          "",
+          false,
+          "/home"
+        );
       },
       error: (err) => {
-        this.alertasService.alertaPers('error','Oops...', 'Usuario o contraseña incorrecto/s',false,'');
-      }
+        this.alertasService.alertaPers(
+          "error",
+          "Oops...",
+          "Usuario o contraseña incorrecto/s",
+          false,
+          ""
+        );
+      },
     });
+  }
+
+  // formulario registro
+  registarUsuario() {
+    if (
+      this.nombre.trim() === "" ||
+      this.email.trim() === "" ||
+      this.password.trim() === ""
+    ) {
+      this.alertasService.alertaPers(
+        "warning",
+        "Formulario incompleto",
+        "Debes rellenar todos los campos",
+        false,
+        ""
+      );
+      return;
+    } else {
+      console.log(this.nombre);
+      console.log(this.email);
+      console.log(this.password);
+
+      const nuevoUsuario = new Usuario(this.nombre, this.email, this.password, "USER");
+      this.usuarioService.registro(nuevoUsuario).subscribe({
+        next: () => {
+          this.alertasService.success("¡Registro completado!");
+          this.toggleFlip();
+        },
+        error: () => {
+          this.alertasService.error("No se pudo registarr al Usuario");
+        },
+      });
     }
+  }
 }

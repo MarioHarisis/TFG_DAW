@@ -1,21 +1,20 @@
-import { Component, EventEmitter, Output, ViewEncapsulation   } from '@angular/core';
+import { Component, EventEmitter, Output, ViewEncapsulation } from "@angular/core";
 
 @Component({
-  selector: 'app-reservas',
+  selector: "app-reservas",
   standalone: false,
-  templateUrl: './reservas.component.html',
-  styleUrl: './reservas.component.css',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: "./reservas.component.html",
+  styleUrl: "./reservas.component.css",
+  encapsulation: ViewEncapsulation.None,
 })
 export class ReservasComponent {
-
   minDate: Date = new Date(); // fecha de hoy
   selectedDate: Date = new Date(); // Fecha seleccionada del calendario
-  horaSeleccionada: string = ''; // Hora seleccionada del select
+  horaSeleccionada: string = ""; // Hora seleccionada del select
   horasDisponibles: string[] = []; // Lista de horas disponibles
 
-  @Output() dateTimeSelected = new EventEmitter<Date>();  // Evento para emitir la fecha y hora combinada
-  
+  @Output() dateTimeSelected = new EventEmitter<Date>(); // Evento para emitir la fecha y hora combinada
+
   constructor() {
     this.generarHorasDisponibles(); // Inicializar la lista de horas
   }
@@ -24,9 +23,10 @@ export class ReservasComponent {
   private generarHorasDisponibles(): void {
     const horas = [];
     for (let h = 0; h <= 23; h++) {
-      for (let m = 0; m < 60; m += 30) { // Cada 30 minutos
-        const hour = (h < 10 ? '0' + h : h);
-        const minute = (m === 0 ? '00' : '30');
+      for (let m = 0; m < 60; m += 30) {
+        // Cada 30 minutos
+        const hour = h < 10 ? "0" + h : h;
+        const minute = m === 0 ? "00" : "30";
         horas.push(`${hour}:${minute}`);
       }
     }
@@ -48,10 +48,12 @@ export class ReservasComponent {
   // Combina la fecha seleccionada y la hora seleccionada en un solo objeto Date
   private emitDateTime(): void {
     if (this.selectedDate && this.horaSeleccionada) {
-      const [hours, minutes] = this.horaSeleccionada.split(':');
+      const [hours, minutes] = this.horaSeleccionada.split(":");
       const dateTime = new Date(this.selectedDate);
+
       dateTime.setHours(Number(hours));
       dateTime.setMinutes(Number(minutes));
+
       this.dateTimeSelected.emit(dateTime); // Emitir el objeto Date combinado
     }
   }

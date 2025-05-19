@@ -1,10 +1,13 @@
 import { Reserva } from "./Reserva";
 
-export interface Usuario {
-      id: number,
-      nombre: string,
-      email: string,
-      password: string,
-      rol: string,
-      reservas: Reserva[];
-  }
+export class Usuario {
+  id!: number;
+
+  constructor(
+    public nombre: string,
+    public email: string,
+    public password: string,
+    public rol: string,
+    public reservas?: Reserva[] // Aquí agregamos la lista de reservas
+  ) {}
+}
