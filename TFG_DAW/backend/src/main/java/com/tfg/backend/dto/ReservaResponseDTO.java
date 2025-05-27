@@ -14,7 +14,7 @@ public class ReservaResponseDTO {
     private LocalDateTime fecha;
     private String estado;
     private Long usuarioId;
-    private EspacioDTO espacio;
+    private Long espacioId;
 
     // este constructor nos permitirá devolver un objeto Reserva sin que contenga
     // los objetos Usuario y Espacio que provocan recursividad infinita
@@ -23,6 +23,6 @@ public class ReservaResponseDTO {
         this.fecha = reserva.getFecha();
         this.estado = reserva.getEstado();
         this.usuarioId = reserva.getUsuario().getId();
-        this.espacio = new EspacioDTO(reserva.getEspacio());
+        this.espacioId = reserva.getEspacio().getId();
     }
 }

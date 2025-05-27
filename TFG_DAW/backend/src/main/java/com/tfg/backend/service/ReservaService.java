@@ -7,10 +7,13 @@ import com.tfg.backend.repository.EspacioRepository;
 import com.tfg.backend.repository.ReservaRepository;
 import com.tfg.backend.repository.UsuarioRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservaService {
@@ -55,5 +58,23 @@ public class ReservaService {
     // devuelve Reservas crudas, con Objetos
     public List<Reserva> obtenerReservas() {
         return reservaRepository.findAll();
+    }
+
+    public List<Reserva> getReservasPorUsuario(Long usuarioId) {
+        return reservaRepository.findByUsuarioId(usuarioId);
+    }
+
+    public void eliminarReserva(Long id) {
+
+        // Optional de la busqueda de la reserva
+        Optional<Reserva> optionalReserva = reservaRepository.findById(id);
+
+        // comprobar que existe esa reserva con el ID por param
+        if (!optionalReserva.isPresent()) {
+            throw new EntityNotFoundException("Reserva no encontrada con ID: " + id);
+        }
+
+        // eliminar reserva por ID
+        reservaRepository.deleteById(id);
     }
 }

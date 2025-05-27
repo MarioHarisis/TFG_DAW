@@ -24,4 +24,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     // Verifica si ya existe una reserva en el espacio que se solape con la nueva
     List<Reserva> findByEspacioIdAndFecha(
             Long espacioId, LocalDateTime fecha);
+
+    List<Reserva> findByUsuarioId(Long usuarioId);
 }

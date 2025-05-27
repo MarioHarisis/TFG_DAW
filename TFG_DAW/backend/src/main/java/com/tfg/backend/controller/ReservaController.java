@@ -71,4 +71,24 @@ public class ReservaController {
                 .map(ReservaResponseDTO::new)
                 .toList(); // O collect(Collectors.toList())
     }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public List<ReservaResponseDTO> obtenerReservasPorUsuario(@PathVariable Long usuarioId) {
+        List<Reserva> reservas = reservaService.getReservasPorUsuario(usuarioId);
+        // enviar DTO sin objeto usuario
+        return reservas.stream()
+                .map(ReservaResponseDTO::new)
+                .toList();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarEspacio(@PathVariable Long id) {
+        try {
+            // eliminar espacio por ID
+            reservaService.eliminarReserva(id);
+            return ResponseEntity.noContent().build(); // devolver una respuesta No Content
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build(); // devolver una respuesta Not FOund
+        }
+    }
 }
