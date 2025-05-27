@@ -1,0 +1,222 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid images-container mt-2">
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <!-- Fomrulario superior -->
+      <form class="d-flex" role="search" (submit)="onBuscar($event)">
+        <div class="container my-4 icon-bar">
+          <div
+            class="d-flex align-items-center justify-content-between search-bar"
+          >
+            <span>
+              <!-- boton eliminar filtros -->
+              <button
+                class="btn-eliminar"
+                type="button"
+                (click)="resetearFiltros()"
+              >
+                <svg
+                  viewBox="0 0 15 17.5"
+                  height="17.5"
+                  width="15"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon"
+                >
+                  <path
+                    transform="translate(-2.5 -1.25)"
+                    d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
+                    id="Fill"
+                  ></path>
+                </svg>
+              </button>
+            </span>
+            <!-- Capacidad -->
+            <div class="radio-inputs">
+              <label>
+                <input
+                  class="radio-input"
+                  type="radio"
+                  name="capacidad"
+                  [(ngModel)]="capacidadSeleccionada"
+                  [value]="10"
+                />
+                <span class="radio-tile"
+                  ><span class="radio-label">0-10👤</span></span
+                >
+              </label>
+              <label>
+                <input
+                  class="radio-input"
+                  type="radio"
+                  name="capacidad"
+                  [(ngModel)]="capacidadSeleccionada"
+                  [value]="50"
+                />
+                <span class="radio-tile"
+                  ><span class="radio-label">10-50👤</span></span
+                >
+              </label>
+              <label>
+                <input
+                  class="radio-input"
+                  type="radio"
+                  name="capacidad"
+                  [(ngModel)]="capacidadSeleccionada"
+                  [value]="51"
+                />
+                <span class="radio-tile"
+                  ><span class="radio-label">+50👤</span></span
+                >
+              </label>
+            </div>
+            <!-- Buscar -->
+            <div class="inputGroup">
+              <input
+                type="text"
+                name="terminoBusqueda"
+                [(ngModel)]="terminoBusqueda"
+                required=""
+                autocomplete="off"
+              />
+              <label for="name">Buscar</label>
+            </div>
+            <button class="btn" type="submit">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="24 / basic / search">
+                  <path
+                    id="icon"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10C18 11.8487 17.3729 13.551 16.3199 14.9056L21.7071 20.2929L20.2929 21.7071L14.9056 16.3199C13.551 17.3729 11.8487 18 10 18ZM16 10C16 13.3137 13.3137 16 10 16C6.68629 16 4 13.3137 4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10Z"
+                    fill="#240046"
+                  />
+                </g>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Categories -->
+          <div class="d-flex overflow-auto mt-2">
+            <div class="category-item">
+              <!-- [class.active] para marcar como activa al CSS -->
+              <div
+                class="category-icon"
+                [class.active]="categoriaSeleccionada === 'deporte'"
+                (click)="buscarPorCategoria('deporte')"
+              >
+                ⛳
+              </div>
+              <small>Deporte</small>
+            </div>
+            <div class="category-item">
+              <div
+                class="category-icon"
+                [class.active]="categoriaSeleccionada === 'spa'"
+                (click)="buscarPorCategoria('spa')"
+              >
+                🛀
+              </div>
+              <small>Spa's</small>
+            </div>
+            <div class="category-item">
+              <div
+                class="category-icon"
+                [class.active]="categoriaSeleccionada === 'interior'"
+                (click)="buscarPorCategoria('interior')"
+              >
+                🏠
+              </div>
+              <small>Interior</small>
+            </div>
+            <div class="category-item">
+              <div
+                class="category-icon"
+                [class.active]="categoriaSeleccionada === 'gaming'"
+                (click)="buscarPorCategoria('gaming')"
+              >
+                🕹️
+              </div>
+              <small>Gamming</small>
+            </div>
+            <div class="category-item">
+              <div
+                class="category-icon"
+                [class.active]="categoriaSeleccionada === 'musica'"
+                (click)="buscarPorCategoria('musica')"
+              >
+                🎤
+              </div>
+              <small>Música</small>
+            </div>
+            <div class="category-item">
+              <div
+                class="category-icon"
+                [class.active]="categoriaSeleccionada === 'interiores'"
+                (click)="buscarPorCategoria('interiores')"
+              >
+                🎱
+              </div>
+              <small>Interiores</small>
+            </div>
+            <!-- Agrega más categorías según necesites -->
+            <div class="category-item">
+              <div
+                class="category-icon"
+                [class.active]="categoriaSeleccionada === 'bussiness'"
+                (click)="buscarPorCategoria('bussiness')"
+              >
+                💼
+              </div>
+              <small>Bussiness</small>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- cards de Espacios -->
+<div class="container-fluid px-4">
+  <div class="d-flex flex-wrap justify-content-center gap-4">
+    <div *ngFor="let item of espaciosFiltrados">
+      <div class="card" [routerLink]="['/detail/' + item.id]">
+        <img [src]="item.imagen" alt="Espacio-img" class="card-img" />
+        <div class="card-img-overlay">
+          <h5 class="card-title text-center">
+            {{ item.ubicacion }} - {{ item.precio }}€/h
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Si no hay resultados -->
+<div
+  class="container-fluid px-4"
+  *ngIf="espaciosFiltrados.length === 0 && espacios.length > 0"
+>
+  <div class="d-flex flex-wrap justify-content-center gap-4">
+    <!-- loader -->
+    <div class="three-body">
+      <div class="three-body__dot"></div>
+      <div class="three-body__dot"></div>
+      <div class="three-body__dot"></div>
+    </div>
+    <div>
+      <h5 class="text-center">
+        No se encontraron espacios con los filtros seleccionados.
+      </h5>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

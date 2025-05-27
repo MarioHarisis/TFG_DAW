@@ -1,0 +1,51 @@
+/* Fuentes limpias y modernas */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e8e8e8;
+  }
+
+  /* Imagen de perfil */
+  img.rounded-circle {
+    border: 4px solid #5A189A;
+  }
+  
+  /* Títulos */
+  h4 {
+    color: #3a3a3c;
+  }
+  
+  h6 {
+    font-weight: 600;
+  }
+  
+  /* Texto general */
+  .text-muted {
+    color: #888 !important;
+  }
+  
+  .text-dark {
+    color: #333 !important;
+  }
+  
+  .btn-dark {
+    background-color: #240046;
+    border: none;
+    color: white;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-dark:hover {
+    background-color: #5A189A;
+  }
+  
+  /* Información de usuario */
+  .bg-light {
+    background-color: #f9f9fc !important;
+    border-radius: 1rem;
+    border: 1px solid #e0e0e0 !important;
+  }
+  
+  .border {
+    border-color: #5A189A !important;
+  }

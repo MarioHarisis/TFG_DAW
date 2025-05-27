@@ -1,0 +1,161 @@
+<app-navbar></app-navbar>
+
+<div
+  class="my-5 d-flex justify-content-center align-items-center background-image"
+>
+  <div class="card p-5" style="width: 70%">
+    <h3 class="fw-bold mb-4 text-center">
+      {{ modoEdicion ? "Editar mi espacio" : "Agregar mi espacio" }}
+    </h3>
+    <form (ngSubmit)="submit()">
+      <div *ngIf="modoEdicion && espacio.imagen" class="mb-4 text-center">
+        <img
+          [src]="espacio.imagen"
+          alt="Imagen del espacio"
+          class="img-fluid rounded shadow-sm"
+          style="max-height: 550px; width: 80%; object-fit: cover"
+        />
+      </div>
+      <!-- nombre -->
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          name="nombre"
+          placeholder="El nombre de tu espacio a publicar"
+          [(ngModel)]="espacio.nombre"
+          required
+        />
+      </div>
+      <!-- descrripcion -->
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea
+          class="form-control"
+          id="descripcion"
+          name="descripcion"
+          rows="2"
+          maxlength="200"
+          placeholder="Cuéntanos sobre tu espacio..."
+          [(ngModel)]="espacio.descripcion"
+          required
+        ></textarea>
+      </div>
+      <!-- categoria -->
+      <div class="mb-3">
+        <label for="categoria" class="form-label">Categoria</label>
+        <select
+          class="form-control"
+          name="categoria"
+          id="categoria"
+          [(ngModel)]="espacio.categoria"
+          required=""
+        >
+          <option value="" disabled hidden>Selecciona categoria</option>
+          <option value="deporte">Deporte</option>
+          <option value="Spa">Spa</option>
+          <option value="gaming">Gaming</option>
+          <option value="musica">Musica</option>
+          <option value="bussiness">Bussiness</option>
+        </select>
+      </div>
+      <!-- ubicacion -->
+      <div class="mb-3">
+        <label for="ubicacion" class="form-label">Ubicación</label>
+        <input
+          type="text"
+          class="form-control"
+          id="ubicacion"
+          name="ubicacion"
+          placeholder="¿Donde se encuentra?"
+          [(ngModel)]="espacio.ubicacion"
+          maxlength="15"
+        />
+      </div>
+      <!-- Precio -->
+      <div class="mb-3">
+        <label for="precio" class="form-label">Precio</label>
+        <input
+          type="number"
+          class="form-control"
+          id="precio"
+          name="precio"
+          placeholder="€/hora"
+          [(ngModel)]="espacio.precio"
+          min="1"
+        />
+      </div>
+      <!-- personas -->
+      <div class="mb-3 text-center">
+        <label>
+          ¿Cuántas personas caben en tu espacio?
+          <div class="radio-inputs">
+            <label>
+              <input
+                class="radio-input"
+                type="radio"
+                name="capacidad"
+                value="10"
+                [(ngModel)]="espacio.capacidad"
+              />
+              <span class="radio-tile">
+                <span class="radio-label">0-10👤</span>
+              </span>
+            </label>
+            <label>
+              <input
+                class="radio-input"
+                type="radio"
+                name="capacidad"
+                value="50"
+                [(ngModel)]="espacio.capacidad"
+              />
+              <span class="radio-tile">
+                <span class="radio-label">10-50👤</span>
+              </span>
+            </label>
+            <label>
+              <input
+                class="radio-input"
+                type="radio"
+                name="capacidad"
+                value="51"
+                [(ngModel)]="espacio.capacidad"
+              />
+              <span class="radio-tile">
+                <span class="radio-label">+50👤</span>
+              </span>
+            </label>
+          </div>
+        </label>
+      </div>
+
+      <!-- Cargar imagen -->
+      <div class="mb-3">
+        <label for="imagen" class="form-label">Sube una imagen</label>
+        <input
+          type="file"
+          class="form-control"
+          id="imagen"
+          (change)="onFileChange($event)"
+          name="imagen"
+          accept="image/*"
+          #fileInput
+        />
+        <!-- #fileInput para enlazar con la lógica -->
+      </div>
+      <div class="d-grid">
+        <!-- deshabilitar botón mientras se envía el nuevo espacio -->
+        <button type="submit" class="btn" [disabled]="enviando">
+          Publicar espacio
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="mt-5">
+  <app-footer></app-footer>
+</div>

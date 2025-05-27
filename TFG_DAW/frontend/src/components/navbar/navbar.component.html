@@ -1,0 +1,207 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid navbar-container">
+    <!-- LOGO -->
+
+    <!-- ICONOS -->
+    <ul class="navbar-nav d-flex flex-row">
+      <!-- Home icon -->
+      <li class="nav-item">
+        <a class="nav-link" (click)="metodoHome()" title="Home">
+          <svg
+            width="42"
+            height="42"
+            viewBox="0 0 42 42"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M38.5 18.375C38.5 16.2575 37.0825 13.545 35.35 12.3375L24.535 4.76004C22.085 3.04504 18.1475 3.13254 15.785 4.97004L6.3525 12.32C4.7775 13.545 3.5 16.1525 3.5 18.13V31.0975C3.5 35.1575 6.8075 38.4825 10.8675 38.4825H31.1325C35.1925 38.4825 38.5 35.1575 38.5 31.115V25.69"
+              stroke="#240046"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M21 31.4825V26.2325"
+              stroke="#240046"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </li>
+
+      <!-- Añadir icon -->
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          (click)="navegarAgregarEspacio()"
+          title="Agregar Espacio"
+          ><svg
+            width="48"
+            height="48"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M24 16V32M16 24H32M44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24C4 12.9543 12.9543 4 24 4C35.0457 4 44 12.9543 44 24Z"
+              stroke="#240046"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </li>
+
+      <!-- Calendar icon -->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/calendario']" title="Mis Reservas"
+          ><svg
+            width="48"
+            height="48"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M33.5 7.12V4C33.5 3.18 32.82 2.5 32 2.5C31.18 2.5 30.5 3.18 30.5 4V7H17.5V4C17.5 3.18 16.82 2.5 16 2.5C15.18 2.5 14.5 3.18 14.5 4V7.12C9.09997 7.62 6.47997 10.84 6.07997 15.62C6.03997 16.2 6.51997 16.68 7.07997 16.68H40.92C41.5 16.68 41.98 16.18 41.92 15.62C41.52 10.84 38.9 7.62 33.5 7.12Z"
+              fill="#240046"
+            />
+            <path
+              opacity="0.4"
+              d="M42 21.6799V25.1599C42 26.3799 40.92 27.3199 39.72 27.1199C39.16 27.0399 38.58 26.9799 38 26.9799C31.94 26.9799 27 31.9199 27 37.9799C27 38.8999 27.36 40.18 27.74 41.34C28.18 42.64 27.22 43.9799 25.84 43.9799H16C9 43.9799 6 39.9799 6 33.9799V21.6599C6 20.5599 6.9 19.6599 8 19.6599H40C41.1 19.6799 42 20.5799 42 21.6799Z"
+              fill="#240046"
+            />
+            <path
+              d="M38 30C33.58 30 30 33.58 30 38C30 39.5 30.42 40.92 31.16 42.12C32.54 44.44 35.08 46 38 46C40.92 46 43.46 44.44 44.84 42.12C45.58 40.92 46 39.5 46 38C46 33.58 42.42 30 38 30ZM42.14 37.14L37.88 41.08C37.6 41.34 37.22 41.48 36.86 41.48C36.48 41.48 36.1 41.34 35.8 41.04L33.82 39.06C33.24 38.48 33.24 37.52 33.82 36.94C34.4 36.36 35.36 36.36 35.94 36.94L36.9 37.9L40.1 34.94C40.7 34.38 41.66 34.42 42.22 35.02C42.78 35.62 42.74 36.56 42.14 37.14Z"
+              fill="#240046"
+            />
+            <path
+              d="M17 30.0001C16.48 30.0001 15.96 29.7801 15.58 29.4201C15.22 29.0401 15 28.5201 15 28.0001C15 27.4801 15.22 26.9601 15.58 26.5801C16.04 26.1201 16.74 25.9 17.4 26.04C17.52 26.06 17.64 26.1 17.76 26.16C17.88 26.2 18 26.2601 18.12 26.3401C18.22 26.4201 18.32 26.5001 18.42 26.5801C18.78 26.9601 19 27.4801 19 28.0001C19 28.5201 18.78 29.0401 18.42 29.4201C18.32 29.5001 18.22 29.58 18.12 29.66C18 29.74 17.88 29.8001 17.76 29.8401C17.64 29.9001 17.52 29.9401 17.4 29.9601C17.26 29.9801 17.12 30.0001 17 30.0001Z"
+              fill="#240046"
+            />
+            <path
+              d="M24 30C23.48 30 22.96 29.78 22.58 29.42C22.22 29.04 22 28.52 22 28C22 27.48 22.22 26.96 22.58 26.58C23.34 25.84 24.68 25.84 25.42 26.58C25.78 26.96 26 27.48 26 28C26 28.52 25.78 29.04 25.42 29.42C25.04 29.78 24.52 30 24 30Z"
+              fill="#240046"
+            />
+            <path
+              d="M17 37C16.48 37 15.96 36.78 15.58 36.42C15.22 36.04 15 35.52 15 35C15 34.48 15.22 33.96 15.58 33.58C15.78 33.4 15.98 33.26 16.24 33.16C16.98 32.84 17.86 33.02 18.42 33.58C18.78 33.96 19 34.48 19 35C19 35.52 18.78 36.04 18.42 36.42C18.04 36.78 17.52 37 17 37Z"
+              fill="#240046"
+            />
+          </svg>
+        </a>
+      </li>
+
+      <!-- Perfil icon -->
+      <li *ngIf="logeado" class="nav-item">
+        <!-- si esta logeado -->
+        <a class="nav-link" [routerLink]="['/perfil']" title="Perfil">
+          <svg
+            viewBox="-0.5 0 25 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#000000"
+            stroke-width="0.75"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M12.0001 13.09C14.4909 13.09 16.5101 11.0708 16.5101 8.58C16.5101 6.08919 14.4909 4.07 12.0001 4.07C9.5093 4.07 7.49011 6.08919 7.49011 8.58C7.49011 11.0708 9.5093 13.09 12.0001 13.09Z"
+                stroke="#240046"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M8.98008 11.91C8.97008 11.91 8.97008 11.91 8.96008 11.92"
+                stroke="#240046"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M16.9701 12.82C19.5601 14.4 21.3201 17.19 21.5001 20.4C21.5101 20.69 21.2801 20.93 20.9901 20.93H3.01007C2.72007 20.93 2.49007 20.69 2.50007 20.4C2.68007 17.21 4.43007 14.43 6.99007 12.85"
+                stroke="#240046"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g>
+          </svg>
+        </a>
+      </li>
+      <li *ngIf="logeado" class="nav-item">
+        <!-- logout -->
+        <a class="nav-link" (click)="logout()" title="Cerrar Sesión">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17"
+                stroke="#240046"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+              <path
+                d="M15 12L2 12M2 12L5.5 9M2 12L5.5 15"
+                stroke="#240046"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g>
+          </svg>
+        </a>
+      </li>
+      <!-- si no está logeado -->
+      <li *ngIf="!logeado" class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']" title="Iniciar Sesión">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M2.00098 11.999L16.001 11.999M16.001 11.999L12.501 8.99902M16.001 11.999L12.501 14.999"
+                stroke="#240046"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17"
+                stroke="#240046"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+            </g></svg
+        ></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<hr class="custom-divider" />

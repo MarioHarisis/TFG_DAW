@@ -1,0 +1,28 @@
+label {color: white;}
+
+/* fechas */
+.card-detail {
+  position: relative;
+}
+
+.calendar-overlay {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background: white;
+  width: 60%;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  background-color: #240046 !important;
+}
+.mat-calendar-body-selected {
+  background-color: #ffffff !important;
+  color: #240046 !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: #ffffff !important;
+  color: #240046 !important;
+}
