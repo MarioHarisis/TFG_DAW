@@ -1,54 +1,76 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ReservaService } from '../../services/reserva.service';
+import { Reserva } from '../../model/Reserva';
+import { EspacioService } from '../../services/espacio.service';
+import { AuthService } from '../../services/auth.service';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { AlertasService } from '../../services/alertas.service';
+
+registerLocaleData(localeEs, 'es');
 
 @Component({
   selector: 'app-calendario',
   standalone: false,
   templateUrl: './calendario.component.html',
-  styleUrl: './calendario.component.css'
+  styleUrl: './calendario.component.css',
 })
 export class CalendarioComponent {
-   minDate: Date = new Date(); // fecha de hoy
-  selectedDate: Date = new Date(); // Fecha seleccionada del calendario
+  minDate: Date = new Date(); // fecha de hoy
   horaSeleccionada: string = ''; // Hora seleccionada del select
   horasDisponibles: string[] = []; // Lista de horas disponibles
 
-  reservas = [
-    { fecha: '2025-05-20', hora: '10:00', tipo: 'Coworking', estado: 'confirmada' },
-    { fecha: '2025-05-22', hora: '15:30', tipo: 'Oficina privada', estado: 'confirmada' },
-    { fecha: '2025-05-25', hora: '09:00', tipo: 'Sala de reuniones', estado: 'pendiente' },
-  ];
+  reservas: Reserva[] = [];
+  selectedDate: Date | null = null;
 
-  @Output() dateTimeSelected = new EventEmitter<Date>();  // Evento para emitir la fecha y hora combinada
+  usuario!: any;
+  espacio!: any;
 
-  constructor() {
-    this.generarHorasDisponibles(); // Inicializar la lista de horas
-  }
+  reservaEditando: Reserva | null = null;
 
-  // Genera una lista de horas de 00:00 a 23:30 cada 30 minutos
-  private generarHorasDisponibles(): void {
-    const horas = [];
-    for (let h = 0; h <= 23; h++) {
-      for (let m = 0; m < 60; m += 30) {
-        const hour = (h < 10 ? '0' + h : h);
-        const minute = (m === 0 ? '00' : '30');
-        horas.push(`${hour}:${minute}`);
-      }
+  @Output() dateTimeSelected = new EventEmitter<Date>(); // Evento para emitir la fecha y hora combinada
+
+  constructor(
+    private reservaService: ReservaService,
+    private espacioService: EspacioService,
+    private authService: AuthService,
+    private alertasService: AlertasService
+  ) {}
+
+  ngOnInit(): void {
+    // obtener usuario actual
+    this.usuario = this.authService.getUsuario();
+
+    if (this.usuario) {
+      // obtener reservas del usuario
+      this.reservaService
+        .obtenerReservasPorUsuario(this.usuario.id)
+        .subscribe((reservas) => {
+          this.reservas = reservas;
+          console.log('Reservas recibidas:', this.reservas);
+          this.reservas.forEach((reserva) => {
+            this.espacioService
+              .obtenerEspacioId(reserva.espacioId)
+              .subscribe((e) => (this.espacio = e));
+          });
+        });
     }
-    this.horasDisponibles = horas;
   }
+
+  // Marca los días que ya tienen reservas en el calendario
+  getDateClass = (date: Date): string => {
+    const reservadas = this.reservas.map((r) =>
+      new Date(r.fecha).toDateString()
+    );
+    return reservadas.includes(date.toDateString()) ? 'dia-reservado' : '';
+  };
 
   // Evento al seleccionar fecha en el calendario
-onDateChange(event: Date | null): void {
-  if (event) {
-    this.selectedDate = event;
-    this.emitDateTime();
-  }
-}
-
-  // Evento al seleccionar hora
-  onTimeChange(event: any): void {
-    this.horaSeleccionada = event.target.value;
-    this.emitDateTime();
+  onDateChange(event: Date | null): void {
+    if (event) {
+      this.selectedDate = event;
+      this.emitDateTime();
+    }
   }
 
   // Emitir fecha y hora combinadas
@@ -62,20 +84,82 @@ onDateChange(event: Date | null): void {
     }
   }
 
-  // Marca los días que ya tienen reservas en el calendario
-  getDateClass = (date: Date): string => {
-    const reservadas = this.reservas.map(r => new Date(r.fecha).toDateString());
-    return reservadas.includes(date.toDateString()) ? 'dia-reservado' : '';
-  };
-
   editarReserva(reserva: any): void {
-  console.log('Editar reserva:', reserva);
-  // Aquí puedes abrir un modal o redirigir a un formulario
-}
+    console.log('Editar reserva:', reserva);
+    // Aquí puedes abrir un modal o redirigir a un formulario
+  }
 
-eliminarReserva(reserva: any): void {
-  console.log('Eliminar reserva:', reserva);
-  // Aquí podrías mostrar confirmación y luego eliminar del array
-  this.reservas = this.reservas.filter(r => r !== reserva);
-}
+  // eliminar un espacio por su ID
+  eliminarReserva(reserva: any): void {
+    // aviso de seguridad para eliminar Espacios
+    this.alertasService
+      .alertaPers(
+        'warning',
+        '¿Cancelar esta reserva?',
+        'Se cancelará esta reserva',
+        true,
+        ''
+      )
+      .then((confirmado: boolean) => {
+        // alertaPers devuelve un Promise<boolean>
+        // si recibimos true, eliminar
+        if (confirmado) {
+          // eliminar Espacio
+          this.reservaService.eliminarReserva(reserva.id).subscribe({
+            next: () => {
+              // informar de Espacio eliminado
+              this.alertasService
+                .alertaPers(
+                  'success',
+                  'Reserva cancelada correctamente',
+                  '',
+                  false,
+                  ''
+                )
+                .then(() => window.location.reload()); // recargar la página
+            },
+            error: () => {
+              // si ocurre algún error durante la eliminacióm
+              this.alertasService.alertaPers(
+                'error',
+                'No se pudo eliminar la Reserva',
+                '',
+                false,
+                ''
+              );
+            },
+          });
+        } // no hacer nada si se cancela la eliminación del Espacio
+      });
+  }
+
+  // guardar la reserva editada
+  guardarEdicion(): void {
+    if (this.reservaEditando) {
+      this.reservaService
+        .editarReserva(this.reservaEditando.id!, this.reservaEditando)
+        .subscribe({
+          next: () => {
+            this.alertasService.alertaPers(
+              'success',
+              'Reserva actualizada',
+              '',
+              false,
+              ''
+            );
+            this.reservaEditando = null;
+            this.ngOnInit(); // recargar reservas
+          },
+          error: () => {
+            this.alertasService.alertaPers(
+              'error',
+              'Error al actualizar',
+              '',
+              false,
+              ''
+            );
+          },
+        });
+    }
+  }
 }

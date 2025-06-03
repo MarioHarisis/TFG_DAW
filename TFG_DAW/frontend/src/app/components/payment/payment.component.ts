@@ -50,6 +50,7 @@ export class PaymentComponent {
         usuarioId: datosReserva.usuarioId,
         espacioId: datosReserva.espacioId,
       };
+      // crear la nueva reserva
       this.reservaService.crearReserva(reservaDto).subscribe({
         next: () => {
           this.alertasService.alertaPers(

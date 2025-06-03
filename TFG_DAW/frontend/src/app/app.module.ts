@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,12 +24,13 @@ import { TarjetaComponent } from './components/tarjeta/tarjeta.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {MatTimepickerModule} from '@angular/material/timepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {provideNativeDateAdapter} from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CalendarioComponent } from './components/calendario/calendario.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +48,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     EthereumComponent,
     TarjetaComponent,
     ReservasComponent,
+    CalendarioComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,11 +62,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatInputModule,
     MatTimepickerModule,
     MatDatepickerModule,
-    
   ],
-  providers: [
-    provideClientHydration(withEventReplay())
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideClientHydration(withEventReplay())],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

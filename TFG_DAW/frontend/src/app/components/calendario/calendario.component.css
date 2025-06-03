@@ -18,7 +18,7 @@
   transform: scale(1.01);
 }
 
-/* DÃa con reserva */
+/* Dia con reserva */
 .dia-reservado .mat-calendar-body-cell-content {
   background-color: #9D4EDD !important;
   color: white !important;
